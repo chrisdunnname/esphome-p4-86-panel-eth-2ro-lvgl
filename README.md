@@ -19,7 +19,7 @@ Each provides a different theme and voice assistant interface.
 
 The wakeword is not tied to the UI Mode providing flexibility for your preferred experience.
 
-The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal and hey luna.
+The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal.
 Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default. 
 
 The UI and Voice Assistant experience is implemented out of the box.
