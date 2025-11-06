@@ -1,9 +1,26 @@
 # ESP32-P4-86-Panel-ETH-2RO LVGL Firmware 
 ESPHome Configuration for the ESP32-P4-86-Panel-ETH-2RO with an LVGL UI.
 
-All credit and inspiration for the base configuration goes to https://github.com/alaltitov/Waveshare-ESP32-P4-86-Panel-ETH-2RO
+**********CONFIGURATION COMING SOON**********
 
-This firmware provides the ESP32-P4-86-Panel-ETH-2RO with a voice assistant, UI and other devices from your Home Assistant.
+All credit for getting this working goes to https://github.com/alaltitov/Waveshare-ESP32-P4-86-Panel-ETH-2RO
+All credit and inspiration for the original UI and device configuration goes to https://github.com/BigBobbas/ESP32-S3-Box3-Custom-ESPHome/
+This is an updated port of my S3 box configuration https://github.com/chrisdunnname/esphome-s3-box-3-lvgl
+
+This firmware provides the ESP32-P4-86-Panel-ETH-2RO (and non ethernet version) with a voice assistant, timers, screen saver with analog/digital clock and sleep, 12/24 hour time, media controls, alarmo integration, alarm clock, internal and external audio, notifications with sound, and multiple pages for lights, thermostats, switches, media, scenes, locks other devices from your Home Assistant.
+
+A large number of entities are exposed to Home Assistant including a notification text entity that provides the ability to push notifications to the device which will display on screen for 10 seconds (with an optional notification sound) and an Image URL entity that provides the ability to push the URL for a PNG image to the device which will display on screen for 30 seconds (with no notification sound). This can be used with a [JPG to PNG Converter](https://github.com/youkorr/hacs-jpg-to-png-converter) in an automation to capture a snapshot from a camera and push it to the device.
+
+A UI Mode feature provides the ability to switch the user experience with 3 modes: Default, HAL, Home.
+Each provides a different theme and voice assistant interface.
+- Default provides the original theme and a more standard Home Assistant experience. 
+- HAL provides a darker theme and an animated Space Odyssey inspired 2001 HAL voice assistant.
+- Home provides a more subtle theme and an animated Google inspired voice assistant.
+
+The wakeword is not tied to the UI Mode providing flexibility for your preferred experience.
+
+The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal and hey luna.
+Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default. 
 
 The UI and Voice Assistant experience is implemented out of the box.
 Configuration is required to integrate button actions into your Home Assistant.
