@@ -1,8 +1,6 @@
 # ESP32-P4-86-Panel-ETH-2RO LVGL Firmware 
 ESPHome Configuration for the ESP32-P4-86-Panel-ETH-2RO with an LVGL UI.
 
-**********CONFIGURATION COMING SOON**********
-
 All credit for getting this working goes to https://github.com/alaltitov/Waveshare-ESP32-P4-86-Panel-ETH-2RO.
 All credit and inspiration for the original UI and device configuration goes to https://github.com/BigBobbas/ESP32-S3-Box3-Custom-ESPHome/.
 This is an updated port of my S3 box configuration https://github.com/chrisdunnname/esphome-s3-box-3-lvgl.
@@ -39,7 +37,7 @@ Optional:
 - Printed 86-Box: https://makerworld.com/en/models/475224-type-86-switch-desktop-base-123-gangs
 
 # Requirements
-Requires [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/ESP32-P4-86-Panel-ETH-2RO).
+Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/ESP32-P4-86-Panel-ETH-2RO).
 Ethernet version is required to use ethernet and additional GPO Ports. Also required to mount in x86 box.
 
 The minimum supported ESPHome version is 2025.10.0.
@@ -47,6 +45,7 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
 # Loading
 
+![loading](https://github.com/user-attachments/assets/bc6c3b87-54bb-4726-88f8-fc815d243f2d)
 
 # Home
 
@@ -115,6 +114,7 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
 # Screensaver
 
+![screensaver](https://github.com/user-attachments/assets/9e5bc8e2-bb32-4daa-a58c-b3248a93720b)
 - Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
 
 # Settings
