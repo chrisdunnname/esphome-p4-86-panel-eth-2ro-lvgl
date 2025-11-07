@@ -19,8 +19,8 @@ Each provides a different theme and voice assistant interface.
 
 The wakeword is not tied to the UI Mode providing flexibility for your preferred experience.
 
-The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal.
-Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default. 
+The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal and hey luna.
+Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default.  
 
 The UI and Voice Assistant experience is implemented out of the box.
 Configuration is required to integrate button actions into your Home Assistant.
@@ -44,8 +44,138 @@ Ethernet version is required to use ethernet and additional GPO Ports. Also requ
 The minimum supported ESPHome version is 2025.10.0.
 Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
-# More Information
-To be continued...
+# Loading
+
+
+# Home
+**Default UI Mode**
+
+
+**Home Page Functions**
+
+- Tapping on the time will show the alarm clock page.
+- An alarm clock indicator will appear when the alarm clock is enabled and will launch the alarm settings page. 
+- A timer status indicator will appear while a timer is running and will launch the time remaining page
+- The alarm status indicator shows current alarm status and launches the security page
+- The microphone indicator is a mute switch
+- The home assistant indicator indicates if the API is connected
+- The wifi status indicator indicates if the WIFI is connected and launches the wifi page
+- The power indicator shows when powered on.
+- The top right button on the device will switch from Home page to screensaver, stop a ringing timer, or a long 10s press will perform a factory reset.
+- The bottom right button on the device will reboot the device. 
+
+# Voice Assistant
+
+- Standard experience in Default UI Mode
+
+**Voice Timer Started**
+
+
+- Standard experience in Default UI Mode
+
+**Timer Time Remaining**
+
+
+
+**Timer or Alarm Finished**
+
+- Snooze button only shows for Alarm (snooze duration can be set in Home Assistant - default 5 minutes)
+
+# Alarm Clock
+
+- Access this page by clicking on the toolbar clock. Allows enabling alarm and setting a time.
+- Alarm Clock can be turned off from same page or is available as a switch so it can be turned off from voice assistant.
+- Snooze duration can be set in Home Assistant (default 5 minutes).
+
+# Climate
+
+
+
+**Air Conditioner**
+
+
+
+# Lights
+
+
+# Controls
+
+
+# Media
+**Internal Audio**
+
+
+- The volume controls on the media page control the volume of the S3 box including the Voice Assistant.
+
+**External Audio**
+
+
+
+# Screens
+
+
+# Security
+
+
+- Keypad - Pin code is required for alarm deactivation or changing modes, but not activation. 
+
+
+
+# Screensaver
+
+
+- Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
+
+# Settings
+
+
+**Voice Settings**
+
+
+- WakeWord Location can be changed from On Device to Home Assistant
+- Mute Responses will mute any response
+- Wake Sound will play a wake sound when voice assistant wakes
+- Show Responses will display the conversation on the voice assistant screens.
+
+**Screensaver Settings**
+
+
+- Screensaver turns on screensaver after the specified delay
+- Settings opens next page to adjust timeouts
+- Wake on Presence wakes the device when the radar detects motion
+- Turn Screen Off turns off the screen after the specified delay
+
+**Screensaver Timeout Settings**
+
+
+- Delay Secs is the time until the screensaver starts
+- Screen Off Delay is the time until the screen turns off.
+- The brightness slider allows setting the screensaver brightness.
+
+
+**Info**
+
+
+
+**Device Settings**
+
+
+- External Audio outputs audio to the external audio player configured in the substitions section.
+- Notify sound triggers a sound when a text notification is sent to the device. This is different to the wake sound.
+- Brightness slider controls screen brightness
+
+**UI Settings**
+
+- Time Format provides 12 or 24 HR time shown in all places
+- ScreenSaver Clock allows Analog or Digital clock to be shown
+- Temperature Unit updates all displayed temperatures to be Celsius or Fahrenheit
+- UI Mode provides the ability to choose the theme and corresponding voice assistant experience.
+
+# Wifi
+
+
+# OTA Updates
+
 
 # Configuration Guidance
 LVGL functions differently to the standard ESPHOME UI. Instead of using lambda to construct pages and format them separate to the touch screen configuration, LVGL uses a hierarchical page structure combining the touchscreen and UI elements.
