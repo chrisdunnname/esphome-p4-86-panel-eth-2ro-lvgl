@@ -49,8 +49,8 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
 
 # Home
-**Default UI Mode**
 
+![Home](https://github.com/user-attachments/assets/090f5618-d5b3-4cca-9809-47ea9067c8e6)
 
 **Home Page Functions**
 
@@ -165,7 +165,7 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
 
 # OTA Updates
-
+- An OTA page is configured but there is a current issue in ESPHOME 2025.10 for OTA over wifi. I have not tested OTA over Ethernet.
 
 # Configuration Guidance
 LVGL functions differently to the standard ESPHOME UI. Instead of using lambda to construct pages and format them separate to the touch screen configuration, LVGL uses a hierarchical page structure combining the touchscreen and UI elements.
