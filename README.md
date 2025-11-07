@@ -8,6 +8,7 @@ All credit and inspiration for the original UI and device configuration goes to 
 This is an updated port of my S3 box configuration https://github.com/chrisdunnname/esphome-s3-box-3-lvgl.
 
 This firmware provides the ESP32-P4-86-Panel-ETH-2RO (and non ethernet version) with a voice assistant, timers, screen saver with analog/digital clock and sleep, 12/24 hour time, media controls, alarmo integration, alarm clock, internal and external audio, notifications with sound, and multiple pages for lights, thermostats, switches, media, scenes, locks other devices from your Home Assistant.
+A weather service from Home Assistant (e.g. open weather map) can provide temperature and condition for the screen saver.
 
 A large number of entities are exposed to Home Assistant including a notification text entity that provides the ability to push notifications to the device which will display on screen for 10 seconds (with an optional notification sound) and an Image URL entity that provides the ability to push the URL for a PNG image to the device which will display on screen for 30 seconds (with no notification sound). This can be used with a [JPG to PNG Converter](https://github.com/youkorr/hacs-jpg-to-png-converter) in an automation to capture a snapshot from a camera and push it to the device.
 
@@ -89,11 +90,7 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
 # Climate
 
-
-
 **Air Conditioner**
-
-
 
 # Lights
 
@@ -104,11 +101,9 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 # Media
 **Internal Audio**
 
-
 - The volume controls on the media page control the volume of the S3 box including the Voice Assistant.
 
 **External Audio**
-
 
 
 # Screens
@@ -116,18 +111,13 @@ Last tested on Home Assistant 2025.10 and ESPHome Version 2025.10.
 
 # Security
 
-
 - Keypad - Pin code is required for alarm deactivation or changing modes, but not activation. 
 
-
-
 # Screensaver
-
 
 - Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
 
 # Settings
-
 
 **Voice Settings**
 
