@@ -105,7 +105,7 @@ ota:
   - platform: esphome
     id: ota_esphome
     on_begin:
-      - lambda: id(led).turn_on().set_brightness(1.0).set_transition_length(0).perform();
+      - lambda: id(led).turn_on().set_brightness(0.8).set_transition_length(0).perform();
                 id(led).loop();
       - lvgl.page.show: ota_page
       - lambda: "id(lvgl_display).loop();"
