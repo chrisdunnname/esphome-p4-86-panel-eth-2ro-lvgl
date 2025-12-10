@@ -41,7 +41,7 @@ Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/
 Ethernet version is required to use ethernet and additional GPO Ports. Also required to mount in x86 box.
 
 The minimum supported ESPHome version is 2025.11.0.
-Last tested on Home Assistant 2025.11 and ESPHome Version 2025.11.
+Last tested on Home Assistant 2025.12 and ESPHome Version 2025.11.
 
 # Loading
 
@@ -165,7 +165,7 @@ Last tested on Home Assistant 2025.11 and ESPHome Version 2025.11.
 
 
 # OTA Updates
-- OTA should be supported for updates after updating the device to ESPHome 2025.11.0 or later.
+- OTA is supported for updates after updating the device to ESPHome 2025.11.0 or later.
 
 # Configuration Guidance
 LVGL functions differently to the standard ESPHOME UI. Instead of using lambda to construct pages and format them separate to the touch screen configuration, LVGL uses a hierarchical page structure combining the touchscreen and UI elements.
