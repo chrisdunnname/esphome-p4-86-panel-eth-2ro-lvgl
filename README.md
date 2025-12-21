@@ -43,6 +43,10 @@ Ethernet version is required to use ethernet and additional GPO Ports. Also requ
 The minimum supported ESPHome version is 2025.11.0.
 Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 
+# BETA
+The substitution BETA yaml is a preview of a proposed update to be the next release simplifying the configuration using extensive substitution for entities.
+This supports Home Assistant 2025.12 and ESPHome Version 2025.12.
+
 # Loading
 
 ![loading](https://github.com/user-attachments/assets/bc6c3b87-54bb-4726-88f8-fc815d243f2d)
