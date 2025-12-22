@@ -93,13 +93,17 @@ This supports Home Assistant 2025.12 and ESPHome Version 2025.12.
 
 # Climate
 
+![climate](https://github.com/user-attachments/assets/30a43196-fd34-4161-9c09-14a5f33dd7dc)
+
 **Air Conditioner**
 
 # Lights
 
+![lights](https://github.com/user-attachments/assets/53c305bc-e213-47fa-964b-dc8a9ce7419f)
 
 # Controls
 
+![controls](https://github.com/user-attachments/assets/e4f0e6c6-2d10-4a20-9c41-bb84cdd7bdc2)
 
 # Media
 **Internal Audio**
@@ -108,11 +112,15 @@ This supports Home Assistant 2025.12 and ESPHome Version 2025.12.
 
 **External Audio**
 
+![media](https://github.com/user-attachments/assets/693a625a-7cc2-4523-b6a3-f508334f3232)
 
 # Screens
 
+![screens](https://github.com/user-attachments/assets/3c97f641-b16e-4f99-8a35-0b176ceaa6d8)
 
 # Security
+
+![alarm](https://github.com/user-attachments/assets/63224b18-d719-41e7-b21a-5421ce96d701)
 
 - Keypad - Pin code is required for alarm deactivation or changing modes, but not activation. 
 
