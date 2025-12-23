@@ -3,7 +3,7 @@ ESPHome Configuration for the ESP32-P4-86-Panel-ETH-2RO with an LVGL UI.
 
 All credit for getting this working goes to https://github.com/alaltitov/Waveshare-ESP32-P4-86-Panel-ETH-2RO.
 All credit and inspiration for the original UI and device configuration goes to https://github.com/BigBobbas/ESP32-S3-Box3-Custom-ESPHome/.
-This is an updated port of my S3 box configuration https://github.com/chrisdunnname/esphome-s3-box-3-lvgl.
+This is a modified port of my S3 box configuration https://github.com/chrisdunnname/esphome-s3-box-3-lvgl.
 
 This firmware provides the ESP32-P4-86-Panel-ETH-2RO (and non ethernet version) with a voice assistant, timers, screen saver with analog/digital clock and sleep, 12/24 hour time, media controls, alarmo integration, alarm clock, internal and external audio, notifications with sound, and multiple pages for lights, thermostats, switches, media, scenes, locks other devices from your Home Assistant.
 A weather service from Home Assistant (e.g. open weather map) can provide temperature and condition for the screen saver.
@@ -40,12 +40,8 @@ Optional:
 Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/ESP32-P4-86-Panel-ETH-2RO).
 Ethernet version is required to use ethernet and additional GPO Ports. Also required to mount in x86 box.
 
-The minimum supported ESPHome version is 2025.11.0.
+The minimum supported ESPHome version is 2025.12.0.
 Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
-
-# BETA
-The BETA yaml is a preview of a proposed update to be the next release simplifying the configuration using extensive substitution for entities.
-This supports Home Assistant 2025.12 and ESPHome Version 2025.12.
 
 # Loading
 
@@ -180,11 +176,21 @@ This supports Home Assistant 2025.12 and ESPHome Version 2025.12.
 - OTA is supported for updates after updating the device to ESPHome 2025.11.0 or later.
 
 # Configuration Guidance
-LVGL functions differently to the standard ESPHOME UI. Instead of using lambda to construct pages and format them separate to the touch screen configuration, LVGL uses a hierarchical page structure combining the touchscreen and UI elements.
-This means the LVGL section of the YAML contains all the UI elements including the pages and widgets. These widgets are interactive and have different actions associated to their type. 
-Setting the status of these widgets is not done in the LVGL configuration. Instead each component forces appropriate updates to the UI. So when a switch is turned on or off it needs to update the lvgl switch widget to be checked or not checked.
-This means the UI updates interactively so that as actions are performed which send service calls to home assistant or trigger local actions, the corresponding state changes in sensors can update the UI in response.
-For each new or modified widget you need to update the LVGL to specify the action to take when a UI interaction occurs and in parallel you need to update the entity to update the UI on state changes.
+The 2025.12.21 release now enables much easier configuration for new users. 
+All standard user functions included in the configuration are now provided as substitutions in the YAML. 
+Under the "Your Data" section you can change page names, button names and specify entities to enable the standard features of the configuration. 
+Only components associated with active entities in your Home Assistant will be shown on the device otherwise these features will be hidden. This means that you can just update the substitutions for the entities you require and only those items will be shown on the associated pages. 
+This makes it easy for anyone to get started with this configuration in a few minutes. For those deploying to multiple S3 devices this new design makes it easier to deploy the same configuration with different entities and makes it easy for those who wish to separate the substitutions from the core yaml.
 
 The configuration supports wifi or ethernet. The appropriate section must be uncommented and the alternate section commented depending on your preferred implementation.
-Two additional secrets are used for wifi credentials for connecting your device to yur wifi and these are wifi_ssid and wifi_password.
+
+The configuration provides a Wifi QR Code so that guests can scan your screen to be connected to the specified network. 
+This is configured using a secret called "wifi_qr" that needs to be configured in your ESPHome installation.
+This secret uses a format similar to "WIFI:S:your_wifi_ssid;T:WPA;P:your_wifi_password;H:false;;". This is the standard format for Wifi QR codes and more details can be found in the WPA3 specification.
+Two additional secrets are used for wifi credentials for connecting your device to your wifi and these are wifi_ssid and wifi_password.
+
+To use the wake, notify and timer sounds with external audio you will need to load the sounds folder to the www folder in your home assistant. This can be done through an add on like Filebrowser or SambaShare.
+
+API encryption is now standard. You can modify the key from your own config or generate one from the Home Assistant Native API web page. 
+
+If you are stuck or unsure or have a suggestion raise an issue or reach out as this configuration is the result of requests from fellow users and benefits from your support and involvement. 
