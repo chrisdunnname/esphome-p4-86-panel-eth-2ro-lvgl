@@ -354,6 +354,9 @@ sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_climate_1
+        - lvgl.widget.show: temp_climate_1
+        - lvgl.widget.show: but_climate_1
         - lvgl.label.update:
             id: temp_climate_1   
             text: !lambda |-
@@ -392,6 +395,9 @@ sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_climate_2
+        - lvgl.widget.show: temp_climate_2
+        - lvgl.widget.show: icon_climate_2
         - lvgl.label.update:
             id: temp_climate_2   
             text: !lambda |-
@@ -405,6 +411,9 @@ sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_climate_3
+        - lvgl.widget.show: temp_climate_3
+        - lvgl.widget.show: icon_climate_3
         - lvgl.label.update:
             id: temp_climate_3   
             text: !lambda |-
@@ -418,6 +427,9 @@ sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_climate_4
+        - lvgl.widget.show: temp_climate_4
+        - lvgl.widget.show: icon_climate_4
         - lvgl.label.update:
             id: temp_climate_4   
             text: !lambda |-
@@ -431,6 +443,9 @@ sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_climate_5
+        - lvgl.widget.show: temp_climate_5
+        - lvgl.widget.show: icon_climate_5
         - lvgl.label.update:
             id: temp_climate_5   
             text: !lambda |-
@@ -444,6 +459,9 @@ sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_climate_6
+        - lvgl.widget.show: temp_climate_6
+        - lvgl.widget.show: icon_climate_6
         - lvgl.label.update:
             id: temp_climate_6   
             text: !lambda |-
@@ -461,7 +479,7 @@ sensor:
       then:
         - lvgl.widget.show: temp_label
         - lvgl.label.update:
-            id: temp_label   
+            id: temp_label
             text: !lambda |-
               char buf[10];
               sprintf(buf, "%.1f%s", x, (strcmp(id(temp_unit).current_option(), "Fahrenheit") == 0 ? "°F" : "°C"));
@@ -2790,6 +2808,9 @@ text_sensor:
     id: alarm_status
     on_value:
       then:
+        - lvgl.widget.show: lbl_alarm_status
+        - lvgl.widget.show: lbl_alarm
+        - lvgl.widget.show: btn_mx_alarm
         - script.execute: set_alarm_status
 
 ##### CLIMATE PAGE TEXT SENSORS #####
@@ -2910,19 +2931,21 @@ text_sensor:
     internal: true
     on_value:
       then:
-        if:
-          condition:
-            lambda: return (id(control1_item).state == "on");
-          then:
-            - lvgl.widget.update:
-                  id: but_control_1
-                  state:
-                    checked: !lambda return true;
-          else:
-            - lvgl.widget.update:
-                  id: but_control_1
-                  state:
-                    checked: !lambda return false;
+        - lvgl.widget.show: lbl_control_1
+        - lvgl.widget.show: but_control_1
+        - if:
+            condition:
+              lambda: return (id(control1_item).state == "on");
+            then:
+              - lvgl.widget.update:
+                    id: but_control_1
+                    state:
+                      checked: !lambda return true;
+            else:
+              - lvgl.widget.update:
+                    id: but_control_1
+                    state:
+                      checked: !lambda return false;
 
   - platform: homeassistant
     id: control2_item
@@ -2930,6 +2953,8 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_control_2
+        - lvgl.widget.show: but_control_2
         - if:
             condition:
               lambda: return (id(control2_item).state == "docked");
@@ -2964,6 +2989,8 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_control_4
+        - lvgl.widget.show: but_control_4
         - if:
             condition:
               lambda: return (id(control4_item).state == "on");
@@ -2990,6 +3017,8 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_control_5
+        - lvgl.widget.show: but_control_5
         - if:
             condition:
               lambda: return (id(control5_item).state != "Ready");
@@ -3056,6 +3085,8 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_scenes_1
+        - lvgl.widget.show: but_scenes_1
         - if:
             condition:
               lambda: return (id(scenes1_item).state == "off");
@@ -3082,6 +3113,8 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_scenes_2
+        - lvgl.widget.show: but_scenes_2
         - if:
             condition:
               lambda: return (id(scenes2_item).state == "off");
@@ -3109,6 +3142,8 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - lvgl.widget.show: lbl_security_1
+        - lvgl.widget.show: but_security_1
         - lvgl.widget.update:
             id: but_security_1
             state:
@@ -3431,6 +3466,8 @@ lvgl:
                     grid_rows: [FR(10), FR(10), FR(30), FR(10), FR(10), FR(30)]
                   widgets:
                     - label:
+                        id: lbl_climate_1
+                        hidden: true
                         text: '${climate1_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3441,6 +3478,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - label:
                         id: temp_climate_1
+                        hidden: true
                         text: " "
                         align: CENTER
                         text_align: CENTER
@@ -3451,6 +3489,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_climate_1
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -3481,6 +3520,8 @@ lvgl:
                                       state:
                                         checked: true
                     - label:
+                        id: lbl_climate_2
+                        hidden: true
                         text: '${climate2_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3491,6 +3532,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - label:
                         id: temp_climate_2
+                        hidden: true
                         text: " "
                         align: CENTER
                         text_align: CENTER
@@ -3500,6 +3542,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: icon_climate_2
+                        hidden: true
                         text_font: icon_font_55
                         text: "\U000F050F"
                         align: CENTER
@@ -3510,6 +3554,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: lbl_climate_3
+                        hidden: true
                         text: '${climate3_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3520,6 +3566,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - label:
                         id: temp_climate_3
+                        hidden: true
                         text: " "
                         align: CENTER
                         text_align: CENTER
@@ -3529,6 +3576,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: icon_climate_3
+                        hidden: true
                         text_font: icon_font_55
                         text: "\U000F050F"
                         align: CENTER
@@ -3539,6 +3588,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: lbl_climate_4
+                        hidden: true
                         text: '${climate4_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3549,6 +3600,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - label:
                         id: temp_climate_4
+                        hidden: true
                         text: " "
                         align: CENTER
                         text_align: CENTER
@@ -3558,6 +3610,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: icon_climate_4
+                        hidden: true
                         text_font: icon_font_55
                         text: "\U000F050F"
                         align: CENTER
@@ -3568,6 +3622,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: lbl_climate_5
+                        hidden: true
                         text: '${climate5_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3578,6 +3634,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - label:
                         id: temp_climate_5
+                        hidden: true
                         text: " "
                         align: CENTER
                         text_align: CENTER
@@ -3587,6 +3644,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: icon_climate_5
+                        hidden: true
                         text_font: icon_font_55
                         text: "\U000F050F"
                         align: CENTER
@@ -3597,6 +3656,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: lbl_climate_6
+                        hidden: true
                         text: '${climate6_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3607,6 +3668,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - label:
                         id: temp_climate_6
+                        hidden: true
                         text: " "
                         align: CENTER
                         text_align: CENTER
@@ -3616,6 +3678,8 @@ lvgl:
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
                     - label:
+                        id: icon_climate_6
+                        hidden: true
                         text_font: icon_font_55
                         text: "\U000F050F"
                         align: CENTER
@@ -3884,6 +3948,8 @@ lvgl:
                     grid_rows: [FR(10), FR(40), FR(10), FR(40)]
                   widgets:
                     - label:
+                        id: lbl_light_1
+                        hidden: true
                         text: '${lights1_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3894,6 +3960,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_light_1
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -3918,6 +3985,8 @@ lvgl:
                             data:
                               entity_id: ${lights1_entity}
                     - label:
+                        id: lbl_light_2
+                        hidden: true
                         text: '${lights2_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3928,6 +3997,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_light_2
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -3952,6 +4022,8 @@ lvgl:
                             data:
                               entity_id: ${lights2_entity}
                     - label:
+                        id: lbl_light_3
+                        hidden: true
                         text: '${lights3_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3962,6 +4034,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_light_3
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -3986,6 +4059,8 @@ lvgl:
                             data:
                               entity_id: ${lights3_entity}
                     - label:
+                        id: lbl_light_4
+                        hidden: true
                         text: '${lights4_name}'
                         align: CENTER
                         text_align: CENTER
@@ -3996,6 +4071,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_light_4
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4020,6 +4096,8 @@ lvgl:
                             data:
                               entity_id: ${lights4_entity}
                     - label:
+                        id: lbl_light_5
+                        hidden: true
                         text: '${lights5_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4030,6 +4108,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_light_5
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4054,6 +4133,8 @@ lvgl:
                             data:
                               entity_id: ${lights5_entity}
                     - label:
+                        id: lbl_light_6
+                        hidden: true
                         text: '${lights6_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4064,6 +4145,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_light_6
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4124,6 +4206,8 @@ lvgl:
                     grid_rows: [FR(10), FR(40), FR(10), FR(40)]
                   widgets:
                     - label:
+                        id: lbl_control_1
+                        hidden: true
                         text: '${controls1_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4134,6 +4218,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_control_1
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4161,6 +4246,8 @@ lvgl:
                                     data:
                                       entity_id: ${controls1_entity}
                     - label:
+                        id: lbl_control_2
+                        hidden: true
                         text: '${controls2_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4171,6 +4258,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_control_2
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4204,6 +4292,8 @@ lvgl:
                                     data:
                                       entity_id: ${controls2_entity}
                     - label:
+                        id: lbl_control_4
+                        hidden: true
                         text: '${controls4_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4214,6 +4304,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_control_4
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4241,6 +4332,8 @@ lvgl:
                                     data:
                                       entity_id: ${controls4_entity}
                     - label:
+                        id: lbl_control_5
+                        hidden: true
                         text: '${controls5_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4251,6 +4344,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_control_5
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4578,6 +4672,8 @@ lvgl:
                     grid_rows: [FR(10), FR(40),FR(10), FR(40)]
                   widgets:
                     - label:
+                        id: lbl_scenes_1
+                        hidden: true
                         text: '${scenes1_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4588,6 +4684,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_scenes_1
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4620,6 +4717,8 @@ lvgl:
                                       data:
                                         entity_id: ${scenes1_entity}
                     - label:
+                        id: lbl_scenes_2
+                        hidden: true
                         text: '${scenes2_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4630,6 +4729,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_scenes_2
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4698,6 +4798,8 @@ lvgl:
                     grid_rows: [FR(10), FR(40), FR(10), FR(40)]
                   widgets:
                     - label:
+                        id: lbl_security_1
+                        hidden: true
                         text: '${security1_name}'
                         align: CENTER
                         text_align: CENTER
@@ -4708,6 +4810,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                     - button:
                         id: but_security_1
+                        hidden: true
                         styles: button_style
                         pressed:
                           styles: button_pressed_style
@@ -4753,6 +4856,7 @@ lvgl:
                   text_color: 0xFFFFFF
                   pad_all: 6
                   id: btn_mx_alarm
+                  hidden: true
                   one_checked: true
                   items:
                     text_font: icon_font_55
@@ -4839,6 +4943,7 @@ lvgl:
                                 - lvgl.page.show: alarm_keypad_page
               - label:
                   id: lbl_alarm_status
+                  hidden: true
                   text: " "
                   align: CENTER
                   text_align: CENTER
@@ -6577,6 +6682,7 @@ lvgl:
               - switch.toggle: mute_switch
       - label:
           id: lbl_alarm
+          hidden: true
           align: TOP_RIGHT
           x: -125
           y: 7
@@ -6889,6 +6995,8 @@ binary_sensor:
     internal: true
     on_state:
       then:
+        - lvgl.widget.show: lbl_light_1
+        - lvgl.widget.show: but_light_1
         - lvgl.widget.update:
             id: but_light_1
             state:
@@ -6912,6 +7020,8 @@ binary_sensor:
     internal: true
     on_state:
       then:
+        - lvgl.widget.show: lbl_light_2
+        - lvgl.widget.show: but_light_2
         - lvgl.widget.update:
             id: but_light_2
             state:
@@ -6935,6 +7045,8 @@ binary_sensor:
     internal: true
     on_state:
       then:
+        - lvgl.widget.show: lbl_light_3
+        - lvgl.widget.show: but_light_3
         - lvgl.widget.update:
             id: but_light_3
             state:
@@ -6958,6 +7070,8 @@ binary_sensor:
     internal: true
     on_state:
       then:
+        - lvgl.widget.show: lbl_light_4
+        - lvgl.widget.show: but_light_4
         - lvgl.widget.update:
             id: but_light_4
             state:
@@ -6981,6 +7095,8 @@ binary_sensor:
     internal: true
     on_state:
       then:
+        - lvgl.widget.show: lbl_light_5
+        - lvgl.widget.show: but_light_5
         - lvgl.widget.update:
             id: but_light_5
             state:
@@ -7004,6 +7120,8 @@ binary_sensor:
     internal: true
     on_state:
       then:
+        - lvgl.widget.show: lbl_light_6
+        - lvgl.widget.show: but_light_6
         - lvgl.widget.update:
             id: but_light_6
             state:
