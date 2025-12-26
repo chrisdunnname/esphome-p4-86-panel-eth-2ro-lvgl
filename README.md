@@ -19,11 +19,10 @@ Each provides a different theme and voice assistant interface.
 The wakeword is not tied to the UI Mode providing flexibility for your preferred experience.
 
 The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal and hey luna.
-Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default.  
+Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default. 
 
 The UI and Voice Assistant experience is implemented out of the box.
-Configuration is required to integrate button actions into your Home Assistant.
-This configuration is suitable for anyone with an understanding of ESPHOME, the ESP32-P4-86-Panel-ETH-2RO, Home Assistant and Wake Word Voice Assistants.
+Only basic configuration is required to integrate the standard features with your Home Assistant.
 
 Key Components:
 - Touchscreen: https://esphome.io/components/touchscreen/gt911.html
@@ -53,6 +52,7 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 
 **Home Page Functions**
 
+- The page title is configurable.
 - Tapping on the time will show the alarm clock page.
 - An alarm clock indicator will appear when the alarm clock is enabled and will launch the alarm settings page. 
 - A timer status indicator will appear while a timer is running and will launch the time remaining page
@@ -90,16 +90,22 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 # Climate
 
 ![climate](https://github.com/user-attachments/assets/30a43196-fd34-4161-9c09-14a5f33dd7dc)
+- The page title is configurable.
 
 **Air Conditioner**
 
 # Lights
 
 ![lights](https://github.com/user-attachments/assets/53c305bc-e213-47fa-964b-dc8a9ce7419f)
+- The page title is configurable.
+- The lights page provides buttons to toggle six configurable lights which can be any entity that supports a toggle function including switch, light, media_player, climate, fan, humidifier, cover, script or siren.
 
 # Controls
 
 ![controls](https://github.com/user-attachments/assets/e4f0e6c6-2d10-4a20-9c41-bb84cdd7bdc2)
+- The icon of this home page button and the page title are configurable.
+- The controls page provides buttons to toggle three configurable controls which can be any entity that supports a toggle function including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons can be configured for these 3 controls and must exist in the icon glyphs (default is switch icon).
+- The second row of controls buttons support a garage door (with switch and door state entities), a Home Connect dishwasher (with program, start, stop, state and doorstate entities) and a vacuum cleaner.
 
 # Media
 **Internal Audio**
@@ -113,16 +119,19 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 # Screens
 
 ![screens](https://github.com/user-attachments/assets/3c97f641-b16e-4f99-8a35-0b176ceaa6d8)
+- The icon of this home page button and the page title are configurable.
+- This page provides buttons to toggle six configurable items which can be any entity that supports turn_on, turn_off functions including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons for the On and Off state can be configured for each entity.
 
 # Security
 
 ![alarm](https://github.com/user-attachments/assets/63224b18-d719-41e7-b21a-5421ce96d701)
-
+- The page title and code page title are configurable.
 - Keypad - Pin code is required for alarm deactivation or changing modes, but not activation. 
 
 # Screensaver
 
 ![screensaver](https://github.com/user-attachments/assets/9e5bc8e2-bb32-4daa-a58c-b3248a93720b)
+- The page title is configurable.
 - Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
 
 # Settings
@@ -176,9 +185,9 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 - OTA is supported for updates after updating the device to ESPHome 2025.11.0 or later.
 
 # Configuration Guidance
-The 2025.12.21 release now enables much easier configuration for new users. 
+The 2025.12 release now enables much easier configuration for new users. 
 All standard user functions included in the configuration are now provided as substitutions in the YAML. 
-Under the "Your Data" section you can change page names, button names and specify entities to enable the standard features of the configuration. 
+Under the "Your Data" section you can change page names, button names, icons and specify entities to enable the standard features of the configuration. 
 Only components associated with active entities in your Home Assistant will be shown on the device otherwise these features will be hidden. This means that you can just update the substitutions for the entities you require and only those items will be shown on the associated pages. 
 This makes it easy for anyone to get started with this configuration in a few minutes. For those deploying to multiple S3 devices this new design makes it easier to deploy the same configuration with different entities and makes it easy for those who wish to separate the substitutions from the core yaml.
 
