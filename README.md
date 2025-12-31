@@ -120,13 +120,15 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 
 ![screens](https://github.com/user-attachments/assets/3c97f641-b16e-4f99-8a35-0b176ceaa6d8)
 - The icon of this home page button and the page title are configurable.
-- This page provides buttons to toggle six configurable items which can be any entity that supports turn_on, turn_off functions including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons for the On and Off state can be configured for each entity.
+- This page provides buttons to toggle six configurable items which can be any entity that supports turn_on, turn_off functions including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons for the On and Off state can be configured for each entity and must exist in the icon glyphs (default is screen on/off icons).
 
 # Security
 
 ![p4_security_new](https://github.com/user-attachments/assets/40c24b27-711c-418b-9ea3-0d3e1b4f9c55)
 - The page title and code page title are configurable.
-- Keypad - Pin code is required for alarm deactivation or changing modes, but not activation. 
+- The security page provides buttons to toggle three security items. These will work for locks or any other entity that supports a toggle function including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons for the On and Off state can be configured for each entity and must exist in the icon glyphs (default is padlock lock/unlock icons).
+- Icons on this page are red for off and green for on to indicate security status.
+- Keypad - Pin code is required for alarm deactivation or changing modes, but not activation.
 
 # Screensaver
 
@@ -204,6 +206,6 @@ API encryption is now standard. You can modify the key from your own config or g
 
 Binary Sensors or sensors with an on/off status will work as entities for the lights, controls and scenes pages to show status. Users can still press the buttons and they may appear to turn on/off but they won't do anything and any status update will make the indicator show the HA status. 
 
-For triggering more complex scenarios helper Toggles (input_boolean) and automations can be really useful. You can set an input_boolean as the entity for any of the configurable buttons. You can create an automation using the input_boolean turning on as the trigger, have it perform some actions and then set the input_boolean to off. On the S3 pushing the button will turn this on, triggering the automation and showing the on status and when the automation completes it will go back to off. 
+For triggering more complex scenarios, helper Toggles (input_boolean) and automations can be really useful. You can set an input_boolean as the entity for any of the configurable buttons. You can create an automation using the input_boolean turning on as the trigger, have it perform some actions and then set the input_boolean to off. On the S3 pushing the button will turn this on, triggering the automation and showing the on status and when the automation completes it will go back to off. 
 
 If you are stuck or unsure or have a suggestion raise an issue or reach out as this configuration is the result of requests from fellow users and benefits from your support and involvement. 
