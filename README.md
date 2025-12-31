@@ -124,7 +124,7 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 
 # Security
 
-![alarm](https://github.com/user-attachments/assets/63224b18-d719-41e7-b21a-5421ce96d701)
+![p4_security_new](https://github.com/user-attachments/assets/40c24b27-711c-418b-9ea3-0d3e1b4f9c55)
 - The page title and code page title are configurable.
 - Keypad - Pin code is required for alarm deactivation or changing modes, but not activation. 
 
