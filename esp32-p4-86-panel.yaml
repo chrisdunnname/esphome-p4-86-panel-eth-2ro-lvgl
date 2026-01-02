@@ -1392,6 +1392,11 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Disarmed"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: red
             - lvgl.style.update:
                 id: page_content
                 bg_color: 0x000000
@@ -1419,12 +1424,20 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Pending"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: amber
             - lvgl.style.update:
                 id: page_content
                 bg_color: ${alarmo_background_pending}
             - lvgl.style.update:
                 id: clock_bg
                 bg_color: ${alarmo_background_pending}
+            - lvgl.label.update:
+                id: lbl_alarm
+                text_color: amber  
       - if:
           condition: 
               lambda: return (id(alarm_status).state == "arming");
@@ -1432,6 +1445,11 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Arming"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: amber
             - lvgl.style.update:
                 id: page_content
                 bg_color: ${alarmo_background_pending}
@@ -1454,6 +1472,11 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Armed Home"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: lime
             - lvgl.style.update:
                 id: page_content
                 bg_color: ${alarmo_background_on}
@@ -1481,6 +1504,11 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Armed Away"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: lime
             - lvgl.style.update:
                 id: page_content
                 bg_color: ${alarmo_background_on}
@@ -1508,6 +1536,11 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Armed Night"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: lime
             - lvgl.style.update:
                 id: page_content
                 bg_color: ${alarmo_background_on}
@@ -1535,12 +1568,20 @@ script:
             - lvgl.label.update:
                 id: lbl_alarm_status
                 text: "Triggered"
+            - lvgl.buttonmatrix.update:
+                id: btn_mx_alarm
+                items:
+                  checked:
+                    text_color: red
             - lvgl.style.update:
                 id: page_content
                 bg_color: ${alarmo_background_triggered}
             - lvgl.style.update:
                 id: clock_bg
                 bg_color: ${alarmo_background_triggered}
+            - lvgl.label.update:
+                id: lbl_alarm
+                text_color: red 
       - lvgl.widget.redraw:
  
   - id: update_wifi_info
@@ -5611,8 +5652,7 @@ lvgl:
                         width: 1
                         control:
                           checkable: true
-                          recolor: true
-                        text: "#FF0000 \U000F099E#"
+                        text: "\U000F099E"
                         on_release:
                           - if:
                               condition:
