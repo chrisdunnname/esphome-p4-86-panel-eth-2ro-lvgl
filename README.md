@@ -129,6 +129,7 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 - The security page provides buttons to toggle three security items. These will work for locks or any other entity that supports a toggle function including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons for the On and Off state can be configured for each entity and must exist in the icon glyphs (default is padlock lock/unlock icons).
 - Icons on this page are red for off and green for on to indicate security status.
 - Keypad - Pin code is required for alarm deactivation or changing modes, but not activation.
+- The device background which defaults to black will change color based on alarm status. The colors are configurable.
 
 # Screensaver
 
@@ -187,7 +188,6 @@ Last tested on Home Assistant 2025.12 and ESPHome Version 2025.12.
 - OTA is supported for updates after updating the device to ESPHome 2025.11.0 or later.
 
 # Configuration Guidance
-The 2025.12 release now enables much easier configuration for new users. 
 All standard user functions included in the configuration are now provided as substitutions in the YAML. 
 Under the "Your Data" section you can change page names, button names, icons and specify entities to enable the standard features of the configuration. 
 Only components associated with active entities in your Home Assistant will be shown on the device otherwise these features will be hidden. This means that you can just update the substitutions for the entities you require and only those items will be shown on the associated pages. 
