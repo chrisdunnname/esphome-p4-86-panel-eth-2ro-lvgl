@@ -2782,6 +2782,7 @@ font:
       - "\U000F0594"# clear-night
       - "\U000F0590"# cloudy
       - "\U000F0F2F"# exceptional
+      - "\U000F0591"# fog
       - "\U000F0592"# hail
       - "\U000F0593"# lightning
       - "\U000F067E"# lightning-rainy
