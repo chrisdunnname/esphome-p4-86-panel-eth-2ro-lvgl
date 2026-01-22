@@ -144,6 +144,8 @@ substitutions:
   font_glyphs: '&@!"''%()+=,-_.:°/$€£¥?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzÀàÁáÂâÃãÄäĀāĂăÅåǺǻẠạĄąÆæǼǽĆćĈĉČčĊċÇçĎďĐđÐðÈèÉéÊêẼẽĚěËëĒēĔĕĖėẸẹĘęĜĝǦǧĞğĠġĢģĤĥĦħıÌìÍíÎîĨĩÏïĪīĬĭİỊịĮįȷĴĵĶķĸĹĺĽľĻļŁłĿŀŃńÑñŇňŅņƝɲŊŋŉÒòÓóÔôÕõÖöŌōŎŏŐőỌọǪǫØøǾǿŒœŔŕŘřŖŗŚśŜŝŠšŞşȘșẞßŤťŢţȚțŦŧÞþÙùÚúÛûŨũÜüŪūŬŭŮůŰűỤụŲųẀẁẂẃŴŵẄẅỲỳÝýŶŷỸỹŸÿȲȳŹźŽžŻżĲĳƏəАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧЩЬЫЪЭЮЯабвгдеёжзийклмнопрстуфхцчщьыъэюя'
   font_file: https://github.com/chrisdunnname/esphome-p4-86-panel-eth-2ro-lvgl/raw/main/fonts/Montserrat-Regular.ttf
   icon_font_file: https://github.com/chrisdunnname/esphome-p4-86-panel-eth-2ro-lvgl/raw/main/fonts/materialdesignicons-webfont.ttf
+  font_bpp: 4
+  font_icon_bpp: 4
 #Note: LVGL includes a default prerendered fonts and icons.
 ###########################
 
@@ -214,12 +216,12 @@ ota:
         - lambda: "id(lvgl_display).loop();"
 
 logger:
+  hardware_uart: UART0
   level: debug
   logs:
     lvgl: info
     text_sensor: ERROR
     component: ERROR
-  hardware_uart: UART0
 
 esp_ldo:
   - channel: 3
@@ -340,6 +342,7 @@ light:
     entity_category: config
     output: backlight_output
     restore_mode: ALWAYS_ON
+    default_transition_length: 50ms
     on_turn_on:
       - lvgl.resume:
       - lvgl.widget.redraw:
@@ -583,8 +586,8 @@ i2c:
 
 touchscreen:
   - platform: gt911
-    id: gt911_touchscreen
     # address: 0x14
+    id: gt911_touchscreen
     on_touch:
       - lambda: id(led).turn_on().set_brightness(id(s_default_brightness).state /100).perform();
     on_release:
@@ -600,44 +603,41 @@ touchscreen:
               - lvgl.page.is_showing: saver_page
             then:
               - lvgl.page.show: idle_page
-          
-################# AUDIO
 
 i2s_audio:
   - id: audio_bus
-    i2s_mclk_pin: GPIO13
     i2s_lrclk_pin: GPIO10
     i2s_bclk_pin: GPIO12
+    i2s_mclk_pin: GPIO13
 
 audio_adc:
   - platform: es7210
     id: es7210_adc
     i2c_id: i2c_bus
     address: 0x40
+    bits_per_sample: 16bit
+    sample_rate: 16000
 
 audio_dac:
   - platform: es8311
     id: es8311_dac
     i2c_id: i2c_bus
     address: 0x18
+    bits_per_sample: 16bit
+    sample_rate: 48000
 
 microphone:
   - platform: i2s_audio
     id: box_mic
     i2s_audio_id: audio_bus
-    i2s_din_pin: GPIO11
     sample_rate: 16000
+    i2s_din_pin: GPIO11
     bits_per_sample: 16bit
     adc_type: external
-    # on_data:
-    #   - logger.log:
-    #       format: "Microphone data received: %d bytes"
-    #       args: [x.size()]
-
 
 speaker:
-  - platform: i2s_audio
-    id: i2s_audio_speaker
+  - id: i2s_audio_speaker
+    platform: i2s_audio
     i2s_audio_id: audio_bus
     i2s_dout_pin: GPIO9
     dac_type: external
@@ -647,8 +647,8 @@ speaker:
     audio_dac: es8311_dac
     buffer_duration: 100ms
 
-  - platform: mixer
-    id: mixing_speaker
+  - id: mixing_speaker
+    platform: mixer
     output_speaker: i2s_audio_speaker
     source_speakers:
       - id: announcement_mixing_input
@@ -1736,7 +1736,7 @@ script:
           then:
             - if:
                 condition: 
-                  lambda: return (id(uimode).current_option() == "Default" || id(uimode).current_option() == "");
+                  lambda: return (id(uimode).current_option() == "Default" || id(uimode).current_option() == "" || id(uimode).current_option().empty());
                 then:
                   - lvgl.style.update:
                       id: header_footer
@@ -1919,9 +1919,9 @@ script:
 
 switch:
   - platform: gpio
-    pin: GPIO53  # BSP_POWER_AMP_IO
     name: Speaker Enable
     id: speaker_enable
+    pin: GPIO53  # BSP_POWER_AMP_IO
     restore_mode: ALWAYS_OFF
     entity_category: config
     disabled_by_default: true
@@ -2451,7 +2451,7 @@ number:
     unit_of_measurement: '%'
     optimistic: true
     restore_value: true
-    initial_value: 55
+    initial_value: 40
     step: 5
     min_value: 20
     max_value: 100
@@ -2579,7 +2579,7 @@ image:
 ## Default Images
   defaults:
     type: RGB565
-    resize: 620x718
+    resize: 718x718
     transparency: alpha_channel
     byte_order: little_endian
   images:
@@ -2634,56 +2634,56 @@ font:
   - file: ${font_file}
     id: my_font
     size: 14
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
 
   - file: ${font_file}
     id: my_font12
     size: 12
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
 
   - file: ${font_file}
     id: my_font16
     size: 16
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
 
   - file: ${font_file}
     id: my_font40
     size: 40
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
 
   - file: ${font_file}
     id: my_font60
     size: 60
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
 
   - file: ${font_file}
     id: my_font18
     size: 18
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
 
   - file: ${font_file}
     id: my_font22
     size: 22
-    bpp: 4
+    bpp: ${font_bpp}
     glyphs:
       '${font_glyphs}'
       
   - file: ${icon_font_file}
     id: icon_font_55
     size: 45
-    bpp: 4
+    bpp: ${font_icon_bpp}
     glyphs: &icon_glyphs
       - "\U000F0079"#battery 100%
       - "\U000F007A"#battery 10%
@@ -2801,13 +2801,13 @@ font:
   - file: ${icon_font_file}
     id: icon_font_20
     size: 30
-    bpp: 4
+    bpp: ${font_icon_bpp}
     glyphs: *icon_glyphs
 
   - file: ${icon_font_file}
     id: icon_font_80
     size: 75
-    bpp: 4
+    bpp: ${font_icon_bpp}
     glyphs: *icon_glyphs
 
 text_sensor:
@@ -7413,7 +7413,7 @@ lvgl:
           y: 10
           text_font: my_font22
           text_color: 0xFFFFFF
-          text: ""
+          text: " "
           on_release:
             then:
               lvgl.page.show: alarmclock_page
@@ -7669,7 +7669,7 @@ lvgl:
       border_color: 0x0077b3
       text_color: 0xFFFFFF
       width: 100%
-      height: 50 #increased taskbar for P4
+      height: 50 #taskbar height
     - id: page_content
       bg_color: 0x000000
       width: 100%
