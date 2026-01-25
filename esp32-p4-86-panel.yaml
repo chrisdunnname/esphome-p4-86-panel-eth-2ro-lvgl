@@ -179,7 +179,7 @@ esphome:
 
   project:
     name: "Christian.p4-86-eth"
-    version: "2026.01.21"
+    version: "2026.01.24"
   
 esp32:
   board: esp32-p4-evboard
@@ -210,6 +210,7 @@ ota:
       - lambda: id(led).turn_on().set_brightness(0.8).set_transition_length(0).perform();
                 id(led).loop();
       - lvgl.page.show: ota_page
+      - lvgl.widget.hide: top_layer
       - lambda: "id(lvgl_display).loop();"
     on_progress:
       then:
@@ -602,7 +603,7 @@ touchscreen:
             condition:
               - lvgl.page.is_showing: saver_page
             then:
-              - lvgl.page.show: idle_page
+              - script.execute: draw_display
 
 i2s_audio:
   - id: audio_bus
@@ -1153,6 +1154,13 @@ script:
                   - lvgl.widget.hide: lbl_wifi
                   - lvgl.widget.hide: boot_screen
                   - lvgl.page.show: idle_page
+            - if:
+                condition:
+                  not:
+                    - lvgl.page.is_showing: saver_page
+                then:
+                   - lvgl.widget.show: top_layer
+                   - lvgl.widget.show: lbl_time
           else:
             - lvgl.widget.show: boot_screen
 
@@ -1286,6 +1294,8 @@ script:
             - lambda: id(led).turn_on().set_brightness(id(s_default_brightness).state /100).perform();
             - delay: !lambda return id(s_saver_delay).state * 1000;
             - lambda: id(led).turn_on().set_brightness(id(s_saver_brightness).state /100).perform();
+            - lvgl.widget.hide: top_layer
+            - lvgl.widget.hide: lbl_time
             - lvgl.page.show: saver_page
       - if:
           condition:
@@ -1304,7 +1314,10 @@ script:
             - switch.is_on: s_saver
           then:
             - lambda: id(led).turn_on().set_brightness(id(s_saver_brightness).state /100).perform();
+            - lvgl.widget.hide: top_layer
+            - lvgl.widget.hide: lbl_time
             - lvgl.page.show: saver_page
+
       - if:
           condition:
             - switch.is_on: s_saver_mode
@@ -1911,6 +1924,7 @@ script:
           src: online_png_image
       - delay: 30s
       - lvgl.page.show: idle_page
+      - script.execute: draw_display
       - online_image.release: online_png_image
       - text.set:
           id: onlineimagefile
@@ -2800,6 +2814,12 @@ font:
       
   - file: ${icon_font_file}
     id: icon_font_20
+    size: 20
+    bpp: ${font_icon_bpp}
+    glyphs: *icon_glyphs
+
+  - file: ${icon_font_file}
+    id: icon_font_30
     size: 30
     bpp: ${font_icon_bpp}
     glyphs: *icon_glyphs
@@ -5809,6 +5829,7 @@ lvgl:
               - obj:
                   align: TOP_MID
                   styles: header_footer 
+                  bg_opa: 30%
                   widgets:
                     - label:
                         text: '${ssaver_page_title}'
@@ -5821,6 +5842,7 @@ lvgl:
             height: SIZE_CONTENT
             width: 100%
             align: CENTER
+            y: 30
             pad_all: 0
             border_width: 0
             styles: clock_bg
@@ -5895,6 +5917,7 @@ lvgl:
             height: 340
             width: 100%
             align: CENTER
+            y: 30
             pad_all: 0
             border_width: 0
             styles: clock_bg
@@ -5911,7 +5934,7 @@ lvgl:
                   text_align: CENTER
                   text_color: 0xFFFFFF
                   text_font: my_font22
-                  y: 45
+                  y: 60
         - label:
             id: temp_label
             hidden: true
@@ -5919,7 +5942,7 @@ lvgl:
             text: " "
             text_align: LEFT
             styles: clock_style
-            text_color: lightblue
+            text_color: 0xFFFFFF
             text_font: my_font40
             x: 15
             y: 100
@@ -5929,7 +5952,7 @@ lvgl:
             align: TOP_RIGHT
             text_align: RIGHT
             styles: clock_style
-            text_color: lightblue
+            text_color: 0xFFFFFF
             text_font: icon_font_55
             x: -15
             y: 100
@@ -6188,6 +6211,7 @@ lvgl:
                             - lvgl.widget.hide: but_snooze
                             - switch.turn_off: timer_ringing
                             - lvgl.page.show: idle_page
+                            - script.execute: draw_display
                     - label:
                         text: "Tap screen to dismiss"
                         align: CENTER
@@ -6204,6 +6228,7 @@ lvgl:
                             - lvgl.widget.hide: but_snooze
                             - switch.turn_off: timer_ringing
                             - lvgl.page.show: idle_page
+                            - script.execute: draw_display
                     - button:
                         id: but_snooze
                         styles: button_standard_style
@@ -6228,6 +6253,7 @@ lvgl:
                           - switch.turn_off: timer_ringing
                           - script.execute: snoozealarm
                           - lvgl.page.show: idle_page
+                          - script.execute: draw_display
 
     - id: notification_page
       skip: true
@@ -6287,6 +6313,7 @@ lvgl:
               - obj:
                   align: TOP_MID
                   styles: header_footer 
+                  bg_opa: 30%
                   widgets:
                     - label:
                         text: "OTA"
@@ -7748,8 +7775,7 @@ binary_sensor:
                 - lvgl.page.is_showing: saver_page
               then:
                 - lambda: id(led).turn_on().set_brightness(id(s_default_brightness).state /100).perform();
-                - lvgl.page.show: idle_page
-                - script.execute: saver_enabled
+                - script.execute: draw_display
               else:
                 if:
                   condition:
@@ -7757,7 +7783,7 @@ binary_sensor:
                   then:
                     - script.execute: saver_enabled_manual
                   else:
-                    - lvgl.page.show: idle_page
+                    - script.execute: draw_display
           - if:
               condition:
                 - switch.is_on: timer_ringing
