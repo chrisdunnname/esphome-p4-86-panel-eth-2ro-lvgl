@@ -134,7 +134,7 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 # Screensaver
 
-![screensaver](https://github.com/user-attachments/assets/9e5bc8e2-bb32-4daa-a58c-b3248a93720b)
+![P4_screensaver](https://github.com/user-attachments/assets/a072f3ff-cd06-4e6a-9b86-dc83a083b974)
 - The page title is configurable.
 - Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
 
