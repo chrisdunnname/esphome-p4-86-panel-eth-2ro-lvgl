@@ -185,11 +185,9 @@ esp32:
   board: esp32-p4-evboard
   framework:
     type: esp-idf
-    version: recommended
     advanced:
       enable_idf_experimental_features: true
   flash_size: 32MB
-  cpu_frequency: 360MHz   # 360MHz may still fail due to PlatformIO/ESP-IDF compatibility
 
 psram:
   speed: 200MHz
@@ -256,6 +254,7 @@ esp32_hosted:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  fast_connect: true
   ap:
     ssid: ${name}
     password: ${wifi_fallback_pwd}   
@@ -581,7 +580,7 @@ text:
 i2c:
   sda: GPIO7
   scl: GPIO8
-  scan: true
+  scan: false
   frequency: 400kHz
   id: i2c_bus
 
