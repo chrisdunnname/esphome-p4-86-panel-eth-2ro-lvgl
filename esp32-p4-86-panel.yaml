@@ -254,9 +254,7 @@ esp32_hosted:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  fast_connect: true # WIFI Workaround 2026.1.1
-  post_connect_roaming: false # WIFI Workaround 2026.1.1
-  passive_scan: true # WIFI Workaround 2026.1.1
+  fast_connect: true
   ap:
     ssid: ${name}
     password: ${wifi_fallback_pwd}   
@@ -2815,7 +2813,7 @@ font:
       
   - file: ${icon_font_file}
     id: icon_font_20
-    size: 20
+    size: 30
     bpp: ${font_icon_bpp}
     glyphs: *icon_glyphs
 
@@ -5774,7 +5772,7 @@ lvgl:
             width: 500
             height: 510
             items:
-              text_font: montserrat_20
+              text_font: montserrat_30
               pressed:
                 bg_color: 0xFFFF00
             rows:
@@ -7462,7 +7460,7 @@ lvgl:
           y: 9
           text_align: right
           text_color: 0xFFFFFF
-          text_font: montserrat_20
+          text_font: montserrat_30
           on_release:
             then:
               lvgl.page.show: wifi_page
@@ -7470,7 +7468,7 @@ lvgl:
           id: lbl_api
           hidden: true
           align: TOP_RIGHT
-          x: -64
+          x: -75
           y: 7
           text_font: icon_font_20
           text_color: 0xFFFFFF
@@ -7478,7 +7476,7 @@ lvgl:
       - label:
           id: lbl_mic
           align: TOP_RIGHT
-          x: -96
+          x: -105
           y: 7
           text_font: icon_font_20
           text_color: 0xFFFFFF
@@ -7490,7 +7488,7 @@ lvgl:
           id: lbl_alarm
           hidden: true
           align: TOP_RIGHT
-          x: -125
+          x: -135
           y: 7
           text_font: icon_font_20
           text_color: 0xFFFFFF
@@ -7538,7 +7536,7 @@ lvgl:
           id: top_layer
           items:
             styles: header_footer
-            text_font: montserrat_20
+            text_font: montserrat_30
           rows:
             - buttons:
               - id: page_prev
