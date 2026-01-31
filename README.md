@@ -136,7 +136,8 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 ![P4_screensaver](https://github.com/user-attachments/assets/a072f3ff-cd06-4e6a-9b86-dc83a083b974)
 - The page title is configurable.
-- Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
+- The left side of the screen shows device Temperature and Humidity if an Sensor Dock is connected. Alternatively room temperature and humidity sensors can be defined in substitutions to show data from an external sensor. For custom sensors the screensaver will show temperature or temperature and humidity based on the available entities.
+- The right side of the screen shows your specified weather entity temperature and condition and will not be shown if a valid entity is not specified.  Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
 
 # Settings
 
