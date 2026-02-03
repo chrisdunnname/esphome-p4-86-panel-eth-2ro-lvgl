@@ -62,6 +62,7 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 - The home assistant indicator indicates if the API is connected
 - The wifi status indicator indicates if the WIFI is connected and launches the wifi page
 - The power indicator shows when powered on.
+
 - The top right button on the device will switch from Home page to screensaver, stop a ringing timer, or a long 10s press will perform a factory reset.
 - The bottom right button on the device will reboot the device. 
 
@@ -105,8 +106,8 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 ![controls](https://github.com/user-attachments/assets/e4f0e6c6-2d10-4a20-9c41-bb84cdd7bdc2)
 - The icon of this home page button and the page title are configurable.
-- The controls page provides buttons to toggle three configurable controls which can be any entity that supports a toggle function including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons can be configured for these 3 controls and must exist in the icon glyphs (default is switch icon).
-- The second row of controls buttons support a garage door (with switch and door state entities), a Home Connect dishwasher (with program, start, stop, state and doorstate entities) and a vacuum cleaner.
+- The controls page provides buttons to toggle configurable controls which can be any entity that supports a toggle function including switch, light, media_player, climate, fan, humidifier, cover, script or siren. Icons can be configured for on and off states and must exist in the icon glyphs (default is switch icon).
+- The second row of controls buttons include an additional substitution to allow more complex implementations where the sensor for the state is a different entity to the one for the switch. If both the action and state entity are the same for a button these operate the same as the other controls. These three controls are configured with icons to show a garage door, dishwasher and a vacuum cleaner.
 
 # Media
 **Internal Audio**
@@ -136,8 +137,9 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 ![P4_screensaver](https://github.com/user-attachments/assets/a072f3ff-cd06-4e6a-9b86-dc83a083b974)
 - The page title is configurable.
-- The left side of the screen shows device Temperature and Humidity if an Sensor Dock is connected. Alternatively room temperature and humidity sensors can be defined in substitutions to show data from an external sensor. For custom sensors the screensaver will show temperature or temperature and humidity based on the available entities.
-- The right side of the screen shows your specified weather entity temperature and condition and will not be shown if a valid entity is not specified.  Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
+- The top left corner of the screen shows device Temperature and Humidity from sensors defined in substitutions. These additional substitutions will show temperature or temperature and humidity based on the available entities.
+- The top right side of the screen shows your specified weather entity temperature and condition and will not be shown if a valid entity is not specified.  Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
+- The lower left and right corners include can be configured via substitutions to show any sensor value and any unit of measure. For example these could be air quality indicators. These only show if available. 
 
 # Settings
 
