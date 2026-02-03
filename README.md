@@ -135,7 +135,7 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 # Screensaver
 
-![P4_screensaver](https://github.com/user-attachments/assets/a072f3ff-cd06-4e6a-9b86-dc83a083b974)
+![p4_digital_screensaver](https://github.com/user-attachments/assets/c0119bf4-0970-47eb-8e49-f71bb348fb83)
 - The page title is configurable.
 - The top left corner of the screen shows device Temperature and Humidity from sensors defined in substitutions. These additional substitutions will show temperature or temperature and humidity based on the available entities.
 - The top right side of the screen shows your specified weather entity temperature and condition and will not be shown if a valid entity is not specified.  Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
