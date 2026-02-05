@@ -96,6 +96,8 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 **Air Conditioner**
 
+Tap the change temperature buttons to move slightly or long press to change faster.
+
 # Lights
 
 ![lights](https://github.com/user-attachments/assets/53c305bc-e213-47fa-964b-dc8a9ce7419f)
@@ -189,7 +191,7 @@ Last tested on Home Assistant 2026.1 and ESPHome Version 2026.1.
 
 
 # OTA Updates
-- OTA is supported for updates after updating the device to ESPHome 2025.11.0 or later.
+- OTA is supported.
 
 # Configuration Guidance
 All standard user functions included in the configuration are now provided as substitutions in the YAML. 
