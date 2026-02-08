@@ -6,7 +6,7 @@ All credit and inspiration for the original UI and device configuration goes to 
 
 This is a port of my S3 box configuration https://github.com/chrisdunnname/esphome-s3-box-3-lvgl.
 
-This firmware provides the ESP32-P4-86-Panel-ETH-2RO (and non ethernet version) with a voice assistant, timers, screen saver with analog/digital clock and sleep, 12/24 hour time, media controls, alarmo integration, alarm clock, internal and external audio, notifications with sound, and multiple pages for lights, thermostats, switches, media, scenes, locks other devices from your Home Assistant.
+This firmware provides the ESP32-P4-86-Panel-ETH-2RO (and non ethernet version) with a voice assistant, timers, screen saver with analog/digital clock and sleep, 12/24 hour time, media controls, alarm integration, alarm clock, internal and external audio, notifications with sound, and multiple pages for lights, thermostats, switches, media, scenes, locks other devices from your Home Assistant.
 A weather service from Home Assistant (e.g. open weather map) can provide temperature and condition for the screen saver.
 
 A large number of entities are exposed to Home Assistant including a notification text entity that provides the ability to push notifications to the device which will display on screen for 10 seconds (with an optional notification sound) and an Image URL entity that provides the ability to push the URL for a PNG image to the device which will display on screen for 30 seconds (with no notification sound). This can be used with a [JPG to PNG Converter](https://github.com/youkorr/hacs-jpg-to-png-converter) in an automation to capture a snapshot from a camera and push it to the device.
@@ -215,6 +215,8 @@ Alternatively a text string can be used for a message or a hyperlink can be prov
 To use the wake, notify and timer sounds with external audio you will need to load the sounds folder to the www folder in your home assistant. This can be done through an add on like Filebrowser or SambaShare.
 
 API encryption is now standard. You can modify the key from your own config or generate one from the Home Assistant Native API web page. 
+
+Alarm integration was designed for Alarmo but can support other integrations like Envisalink where alarm modes and statuses are consistent.
 
 Binary Sensors or sensors with an on/off status will work as entities for the lights, controls and scenes pages to show status. Users can still press the buttons and they may appear to turn on/off but they won't do anything and any status update will make the indicator show the HA status. 
 
