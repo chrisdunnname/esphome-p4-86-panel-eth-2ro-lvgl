@@ -4219,7 +4219,7 @@ lvgl:
                     - dropdown:
                         id: dropdown_studioacmode
                         styles: dropdown_style
-                        width: 200
+                        width: 180
                         text_align: CENTER
                         options:
                           - "Off"
@@ -4293,6 +4293,7 @@ lvgl:
                           - delay: 1s
                         on_release:
                           then:
+                            - delay: 250ms
                             - homeassistant.service:
                                 service: climate.set_temperature
                                 data:
@@ -4308,7 +4309,7 @@ lvgl:
                     - spinbox:
                         id: spinbox_studioac
                         styles: spinbox_style
-                        width: 250
+                        width: 200
                         range_from: 16
                         range_to: 31
                         selected_digit: 1
@@ -4318,6 +4319,8 @@ lvgl:
                     - button:
                         id: studioac_spin_up
                         styles: button_style
+                        width: 100
+                        height: 60
                         pressed:
                           styles: button_pressed_style
                         checked:
@@ -4329,6 +4332,7 @@ lvgl:
                           - delay: 1s
                         on_release:
                           then:
+                            - delay: 250ms
                             - homeassistant.service:
                                 service: climate.set_temperature
                                 data:
