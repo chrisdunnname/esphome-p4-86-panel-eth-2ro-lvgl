@@ -2832,6 +2832,13 @@ font:
       '${font_glyphs}'
 
   - file: ${font_file}
+    id: my_font30
+    size: 30
+    bpp: ${font_bpp}
+    glyphs:
+      '${font_glyphs}'
+
+  - file: ${font_file}
     id: labelfont_large
     size: 40
     bpp: ${font_bpp}
@@ -5967,6 +5974,7 @@ lvgl:
                   bg_opa: TRANSP
                   border_width: 0
                   text_color: 0xFFFFFF
+                  text_font: my_font30
                   scales:
                     - range_from: 0
                       range_to: 60
@@ -5975,14 +5983,14 @@ lvgl:
                       ticks:
                         width: 1
                         count: 61
-                        length: 10
+                        length: 5
                         color: 0xFFFFFF
                       indicators:
                         - line:
                             id: minute_hand
                             width: 3
                             color: 0xFFFFFF
-                            r_mod: -4
+                            r_mod: -1
                             value: 0
                     - range_from: 1
                       range_to: 12
@@ -5997,7 +6005,7 @@ lvgl:
                           width: 4
                           length: 10
                           color: 0xcccccc
-                          label_gap: 12
+                          label_gap: 20
                     - range_from: 0
                       range_to: 720
                       angle_range: 360
@@ -6007,9 +6015,9 @@ lvgl:
                       indicators:
                         - line:
                             id: hour_hand
-                            width: 5
+                            width: 4
                             color: 0xFFFFFF
-                            r_mod: -30
+                            r_mod: -60
                             value: 0
               - label:
                   id: day_label
