@@ -2045,10 +2045,23 @@ script:
   - id: snoozealarm
     then:
       - lambda: id(alarmclock_ringing) = false;
+      - lvgl.widget.hide: but_snooze
+      - switch.turn_off: timer_ringing
+      - lvgl.page.show: ${default_page}
+      - script.execute: draw_display
       - delay: !lambda "return id(snooze_time).state * 1000;"
       - lvgl.widget.show: but_snooze
       - lambda: id(voice_assistant_phase) = ${voice_assist_timer_finished_phase_id};
       - switch.turn_on: timer_ringing
+    mode: restart
+
+  - id: stopalarmtimer
+    then:
+      - lambda: id(alarmclock_ringing) = false;
+      - lvgl.widget.hide: but_snooze
+      - switch.turn_off: timer_ringing
+      - lvgl.page.show: ${default_page}
+      - script.execute: draw_display
     mode: restart
 
   - id: showonlineimage
@@ -6366,11 +6379,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                         on_release:
                           then:
-                            - lambda: id(alarmclock_ringing) = false;
-                            - lvgl.widget.hide: but_snooze
-                            - switch.turn_off: timer_ringing
-                            - lvgl.page.show: ${default_page}
-                            - script.execute: draw_display
+                            - script.execute: stopalarmtimer
                     - label:
                         text: "Tap screen to dismiss"
                         align: CENTER
@@ -6383,11 +6392,7 @@ lvgl:
                         grid_cell_y_align: STRETCH
                         on_release:
                           then:
-                            - lambda: id(alarmclock_ringing) = false;
-                            - lvgl.widget.hide: but_snooze
-                            - switch.turn_off: timer_ringing
-                            - lvgl.page.show: ${default_page}
-                            - script.execute: draw_display
+                            - script.execute: stopalarmtimer
                     - button:
                         id: but_snooze
                         styles: button_standard_style
@@ -6408,11 +6413,7 @@ lvgl:
                               align: CENTER
                               text: "\U000F068E"
                         on_release:
-                          - lvgl.widget.hide: but_snooze
-                          - switch.turn_off: timer_ringing
                           - script.execute: snoozealarm
-                          - lvgl.page.show: ${default_page}
-                          - script.execute: draw_display
 
     - id: notification_page
       skip: true
@@ -7981,7 +7982,7 @@ binary_sensor:
               condition:
                 - switch.is_on: timer_ringing
               then:
-                - switch.turn_off: timer_ringing
+                - script.execute: stopalarmtimer
       - timing:
           - ON for at least 10s
         then:
