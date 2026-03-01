@@ -195,6 +195,29 @@ Tap the change temperature buttons to move slightly or long press to change fast
 
 # Getting Started
 
+**First Time?**
+
+The easy way to get started is to create an entry in ESPHome for your new device and paste in the contents of the esp32-p4-86-panel.yaml file in this repository. You can edit the device names as required.
+See the basics below to ensure you have added the 3 required secrets to your ESPHome before compiling. 
+For your new configuration choose Install>Download and compile the code for your device. When this process completes, download the file in modern format for the ESPHome Web Installer.
+Connect your new device to your computer and open this site: [https://web.esphome.io/?dashboard_install](https://web.esphome.io/?dashboard_install)
+Follow the steps to Connect your device and load the file you downloaded earlier to flash the device. 
+Once complete your device should reboot and start. 
+
+Your Home Assistant will recognize the device so you can add it.
+
+When you add the device there is one more option you will need. If you want to use the capabilities of the box to control devices in your Home Assistant you have to give it permission. 
+In Devices>EspHome find the device and click the cog next to it.
+
+![devices-esphome](https://github.com/user-attachments/assets/b2b65e1a-f0a4-41d1-aed0-be1a18f3f057)
+
+Then choose to allow the device to perform Home Assistant Actions.
+
+![allowdeviceactions](https://github.com/user-attachments/assets/9cebb38a-4398-4040-bfd4-b1b20f2d2111)
+
+Now you can modify the configuration and perform later updates using the wireless OTA update.
+The configuration provided will work out of the box but you won't have any buttons to control lights or switches and it won't connect to an external speaker for audit. This is where the configuration options in the config come into play. The first 200 lines are all options that can be adjusted to tailor your box for you and push out new wireless updates to test your changes. 
+
 **The basics**
 
 All standard user functions included in the configuration are provided as substitutions in the YAML. 
