@@ -505,7 +505,7 @@ light:
     name: LCD Backlight
     entity_category: config
     output: backlight_output
-    restore_mode: ALWAYS_ON
+    restore_mode: RESTORE_DEFAULT_ON
     default_transition_length: 50ms
     on_turn_on:
       - lvgl.resume:
@@ -2821,23 +2821,23 @@ globals:
     initial_value: ${voice_assist_not_ready_phase_id}
   - id: wifi_connection
     type: bool
-    restore_value: no
+    restore_value: false
     initial_value: "false"
   - id: api_connection
     type: bool
-    restore_value: no
+    restore_value: false
     initial_value: "false"
   - id: mute_value
     type: bool
-    restore_value: no
+    restore_value: false
     initial_value: "false"
   - id: speaker_volume
     type: int
-    restore_value: no
+    restore_value: false
     initial_value: '5'
   - id: media_state
     type: bool
-    restore_value: no
+    restore_value: false
     initial_value: "false"
   - id: global_first_active_timer
     type: voice_assistant::Timer
@@ -2862,7 +2862,7 @@ globals:
     initial_value: ""
   - id: display_temp
     type: float
-    restore_value: no
+    restore_value: false
     initial_value: '0.0'
   - id: current_uimode
     type: char[50]
