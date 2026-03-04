@@ -212,7 +212,7 @@ substitutions:
   voice_assist_timer_finishing_phase_id: "30"
 
 ###### Fonts & Icons ######
-  font_glyphs: '&@!"''%()+=,-_.:°/$€£¥?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzÀàÁáÂâÃãÄäĀāĂăÅåǺǻẠạĄąÆæǼǽĆćĈĉČčĊċÇçĎďĐđÐðÈèÉéÊêẼẽĚěËëĒēĔĕĖėẸẹĘęĜĝǦǧĞğĠġĢģĤĥĦħıÌìÍíÎîĨĩÏïĪīĬĭİỊịĮįȷĴĵĶķĸĹĺĽľĻļŁłĿŀŃńÑñŇňŅņƝɲŊŋŉÒòÓóÔôÕõÖöŌōŎŏŐőỌọǪǫØøǾǿŒœŔŕŘřŖŗŚśŜŝŠšŞşȘșẞßŤťŢţȚțŦŧÞþÙùÚúÛûŨũÜüŪūŬŭŮůŰűỤụŲųẀẁẂẃŴŵẄẅỲỳÝýŶŷỸỹŸÿȲȳŹźŽžŻżĲĳƏəАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧЩЬЫЪЭЮЯабвгдеёжзийклмнопрстуфхцчщьыъэюяμ'
+  font_glyphs: '*&@!"''%()+=,-_.:°/$€£¥?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzÀàÁáÂâÃãÄäĀāĂăÅåǺǻẠạĄąÆæǼǽĆćĈĉČčĊċÇçĎďĐđÐðÈèÉéÊêẼẽĚěËëĒēĔĕĖėẸẹĘęĜĝǦǧĞğĠġĢģĤĥĦħıÌìÍíÎîĨĩÏïĪīĬĭİỊịĮįȷĴĵĶķĸĹĺĽľĻļŁłĿŀŃńÑñŇňŅņƝɲŊŋŉÒòÓóÔôÕõÖöŌōŎŏŐőỌọǪǫØøǾǿŒœŔŕŘřŖŗŚśŜŝŠšŞşȘșẞßŤťŢţȚțŦŧÞþÙùÚúÛûŨũÜüŪūŬŭŮůŰűỤụŲųẀẁẂẃŴŵẄẅỲỳÝýŶŷỸỹŸÿȲȳŹźŽžŻżĲĳƏəАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧЩЬЫЪЭЮЯабвгдеёжзийклмнопрстуфхцчщьыъэюяμ–'
   font_file: https://github.com/chrisdunnname/esphome-p4-86-panel-eth-2ro-lvgl/raw/main/fonts/Montserrat-Regular.ttf
   icon_font_file: https://github.com/chrisdunnname/esphome-p4-86-panel-eth-2ro-lvgl/raw/main/fonts/materialdesignicons-webfont.ttf
 #Note: LVGL includes a default pre-rendered fonts and icons.
@@ -221,7 +221,7 @@ substitutions:
 
 ###### Hardware Specific Configuration ######
 
-  font_bpp: 4 #1,2,4,8 - Higher bit depth increases flash usage
+  font_bpp: 2 #1,2,4,8 - Higher bit depth increases flash usage
   font_icon_bpp: 4 #1,2,4,8 - Higher bit depth increases flash usage
   image_byte_order: little_endian
   image_resize: 718x718 # 2px below width by height of screen
@@ -505,7 +505,7 @@ light:
     name: LCD Backlight
     entity_category: config
     output: backlight_output
-    restore_mode: RESTORE_DEFAULT_ON
+    restore_mode: ALWAYS_ON
     default_transition_length: 50ms
     on_turn_on:
       - lvgl.resume:
@@ -3144,6 +3144,15 @@ font:
 text_sensor:
   - id: text_request
     platform: template
+    filters:
+      - lambda: |-
+          std::replace(x.begin(), x.end(), '\r', ' ');
+          return x;
+      - lambda: |-
+          std::replace(x.begin(), x.end(), '\n', ' ');
+          return x;
+      - substitute:
+          - "\u2011 ->  "
     on_value:
       - if:
           condition:
@@ -3177,6 +3186,15 @@ text_sensor:
 
   - id: text_response
     platform: template
+    filters:
+      - lambda: |-
+          std::replace(x.begin(), x.end(), '\r', ' ');
+          return x;
+      - lambda: |-
+          std::replace(x.begin(), x.end(), '\n', ' ');
+          return x;
+      - substitute:
+          - "\u2011 ->  "
     on_value:
       - if:
           condition:
