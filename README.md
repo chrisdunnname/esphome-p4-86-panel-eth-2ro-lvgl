@@ -40,8 +40,8 @@ Optional:
 Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/ESP32-P4-86-Panel-ETH-2RO).
 Ethernet version is required to use ethernet and additional GPO Ports. Also required to mount in x86 box.
 
-The minimum supported ESPHome version is 2026.2.0.
-Last tested on Home Assistant 2026.2 and ESPHome Version 2026.2.
+The minimum supported ESPHome version is 2026.3.0.
+Last tested on Home Assistant 2026.3 and ESPHome Version 2026.3.
 
 # Loading
 
