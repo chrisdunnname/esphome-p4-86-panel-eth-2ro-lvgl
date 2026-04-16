@@ -40,8 +40,8 @@ Optional:
 Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/ESP32-P4-86-Panel-ETH-2RO).
 Ethernet version is required to use ethernet and additional GPO Ports. Also required to mount in x86 box.
 
-The minimum supported ESPHome version is 2026.3.0.
-Last tested on Home Assistant 2026.3 and ESPHome Version 2026.3.
+The minimum supported ESPHome version is 2026.4.0.
+Last tested on Home Assistant 2026.4 and ESPHome Version 2026.4.
 
 # Loading
 
@@ -237,7 +237,8 @@ Alternatively a text string can be used for a message or a hyperlink can be prov
 
 To use the wake, notify and timer sounds with external audio you will need to load the sounds folder to the www folder in your home assistant. This can be done through an add on like Filebrowser or SambaShare.
 
-API encryption is now standard. You can modify the key from your own config or generate one from the Home Assistant Native API web page. 
+API encryption is now standard. 
+The `api_key` is a 32-byte base64-encoded string to be used as the encryption key. You can modify the key from your own config or generate one from the Home Assistant Native API web page and replace it. This is not a long live access token. You'll find more details and a generator in the official esphome documentation: https://esphome.io/components/api/#configuration-variables.
 
 Alarm integration was designed for Alarmo but can support other integrations like Envisalink where alarm modes and statuses are consistent.
 
@@ -245,6 +246,6 @@ Binary Sensors or sensors with an on/off status will work as entities for the li
 
 For triggering more complex scenarios, helper Toggles (input_boolean) and automations can be really useful. You can set an input_boolean as the entity for any of the configurable buttons. You can create an automation using the input_boolean turning on as the trigger, have it perform some actions and then set the input_boolean to off. On the S3 pushing the button will turn this on, triggering the automation and showing the on status and when the automation completes it will go back to off. 
 
-If you are stuck or unsure or have a suggestion raise an issue or reach out as this configuration is the result of requests from fellow users and benefits from your support and involvement. 
+If you are stuck or unsure or have a suggestion raise an issue or reach out as this configuration is the result of requests from fellow users and benefits from your support and involvement.
 
 <a href="https://www.buymeacoffee.com/chrisdunn" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
