@@ -259,10 +259,6 @@ psram:
 
 logger:
   hardware_uart: UART0
-  logs:
-    lvgl: info
-    text_sensor: ERROR
-    component: ERROR
 
 esp_ldo:
   - channel: 3
@@ -413,6 +409,7 @@ esphome:
       - lambda: id(led).turn_on().set_brightness(id(s_default_brightness).state /100).perform();
       - lambda: id(time_remaining_0).publish_state ("0:00:00");
       - script.execute: draw_display
+      - script.execute: check_touchscreen_failure
       - if:
           condition:
             switch.is_on: output_audio
@@ -2169,6 +2166,20 @@ script:
           value: ""
     mode: restart
 
+  - id: check_touchscreen_failure
+    then:
+      - logger.log: "Checking for Touch Screen Failure"
+      - delay: 60s
+      - if:
+          condition:
+              - lambda: return id(gt911_touchscreen).is_failed();
+          then:
+            - logger.log: "Touchscreen failed. Rebooting device"
+            - button.press: reboot
+          else:
+            - logger.log: "Touchscreen not failed."
+    mode: single
+
 switch:
   - platform: gpio
     name: Speaker Enable
@@ -3140,9 +3151,13 @@ text_sensor:
             - lvgl.label.update:
                 id: lbl_v_text_request1
                 long_mode: SCROLL_CIRCULAR
+            - lambda: |-
+                lv_obj_set_style_anim_time(id(lbl_v_text_request1), id(text_request).state.length()*125, LV_PART_MAIN);
             - lvgl.label.update:
                 id: lbl_v_text_request2
                 long_mode: SCROLL_CIRCULAR
+            - lambda: |-
+                lv_obj_set_style_anim_time(id(lbl_v_text_request2), id(text_request).state.length()*125, LV_PART_MAIN);
           else:
             - lvgl.label.update:
                 id: lbl_v_text_request1
@@ -3182,6 +3197,8 @@ text_sensor:
             - lvgl.label.update:
                 id: lbl_v_text_response
                 long_mode: SCROLL_CIRCULAR
+            - lambda: |-
+                lv_obj_set_style_anim_time(id(lbl_v_text_response), id(text_response).state.length()*125, LV_PART_MAIN);
           else:
             - lvgl.label.update:
                 id: lbl_v_text_response
