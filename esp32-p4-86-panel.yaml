@@ -259,6 +259,7 @@ psram:
 
 logger:
   hardware_uart: UART0
+  level: WARN
 
 esp_ldo:
   - channel: 3
