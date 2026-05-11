@@ -11,13 +11,16 @@ A weather service from Home Assistant (e.g. open weather map) can provide temper
 
 A large number of entities are exposed to Home Assistant including a notification text entity that provides the ability to push notifications to the device which will display on screen for 10 seconds (with an optional notification sound) and an Image URL entity that provides the ability to push the URL for a PNG image to the device which will display on screen for 30 seconds (with no notification sound). This can be used with a [JPG to PNG Converter](https://github.com/youkorr/hacs-jpg-to-png-converter) in an automation to capture a snapshot from a camera and push it to the device.
 
-A UI Mode feature provides the ability to switch the user experience with 3 modes: Default, HAL, Home.
+A UI Mode feature provides the ability to switch the UI theme with 3 modes: Default, Dark, Grey.
+A VA Mode feature provides the ability to switch the voice assistant animated UI with 3 modes: Default, HAL, Home.
 Each provides a different theme and voice assistant interface.
-- Default provides the original theme and a more standard Home Assistant experience. 
-- HAL provides a darker theme and an animated Space Odyssey inspired 2001 HAL voice assistant.
-- Home provides a more subtle theme and an animated Google inspired voice assistant.
+- Default provides a standard ESPHome and Home Assistant experience. 
+- HAL provides an animated Space Odyssey inspired 2001 HAL voice assistant.
+- Home provides an animated Google inspired voice assistant.
 
-The wakeword is not tied to the UI Mode providing flexibility for your preferred experience.
+A no animation YAML configuration is provided that provides the UI Mode but the VA mode does not apply for much smaller firmware.
+
+The wakeword is not tied to the VA Mode providing flexibility for your preferred experience.
 
 The On Device Wake Word includes the standard ESPHome wakeword models (4) but also some experimental models including okay hal and hey luna.
 Additional experimental wake words for okay computer and hey home assistant and included in the config but disabled by default. 
@@ -68,12 +71,12 @@ Last tested on Home Assistant 2026.4 and ESPHome Version 2026.4.
 
 # Voice Assistant
 
-- Standard experience in Default UI Mode
+- Standard experience in Default VA Mode
 
 **Voice Timer Started**
 
 
-- Standard experience in Default UI Mode
+- Standard experience in Default VA Mode
 
 **Timer Time Remaining**
 
@@ -149,9 +152,10 @@ Tap the change temperature buttons to move slightly or long press to change fast
 
 
 - WakeWord Location can be changed from On Device to Home Assistant
+- VA Mode changes the animated voice assistant
 - Mute Responses will mute any response
-- Wake Sound will play a wake sound when voice assistant wakes
 - Show Responses will display the conversation on the voice assistant screens.
+- Wake Sound will play a wake sound when voice assistant wakes
 
 **Screensaver Settings**
 
@@ -185,7 +189,7 @@ Tap the change temperature buttons to move slightly or long press to change fast
 - Time Format provides 12 or 24 HR time shown in all places
 - ScreenSaver Clock allows Analog or Digital clock to be shown
 - Temperature Unit updates all displayed temperatures to be Celsius or Fahrenheit
-- UI Mode provides the ability to choose the theme and corresponding voice assistant experience.
+- UI Mode provides the ability to choose the theme.
 
 # Wifi
 

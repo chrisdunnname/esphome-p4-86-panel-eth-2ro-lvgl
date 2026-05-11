@@ -428,7 +428,7 @@ esphome:
 
   project:
     name: "Christian.p4-86-eth"
-    version: "2026.04.16"
+    version: "2026.05.12"
 
 api:
   encryption:
@@ -966,6 +966,8 @@ media_player:
 micro_wake_word:
   id: mww
   vad:
+    probability_cutoff: 0.20
+    sliding_window_size: 1
   stop_after_detection: false
   models:
     - model: okay_nabu
@@ -988,6 +990,8 @@ micro_wake_word:
     - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
       id: stop
       internal: true
+      probability_cutoff: 0.40  # default 0.5; sliding avg ~0.58 fires reliably
+      sliding_window_size: 3    # default 5; faster trigger
   on_wake_word_detected:
     - if:
         condition:
@@ -1293,6 +1297,7 @@ script:
                               - lambda: id(voice_assistant_phase) = ${voice_assist_timer_finished_phase_id};
                         - lvgl.widget.show: lbl_api
                         - script.execute: set_uimode
+                        - script.execute: set_vamode
                         - if:
                             condition:
                               not:
@@ -1998,18 +2003,9 @@ script:
                       items:
                         bg_color: 0x185281
                         bg_grad_color: 0x00334d
-                  - lvgl.widget.show: listening
-                  - lvgl.widget.show: thinking
-                  - lvgl.widget.show: replying
-                  - lvgl.widget.show: error
-                else:
-                  - lvgl.widget.hide: listening
-                  - lvgl.widget.hide: thinking
-                  - lvgl.widget.hide: replying
-                  - lvgl.widget.hide: error
             - if:
                 condition: 
-                  lambda: return (id(uimode).current_option() == "HAL");
+                  lambda: return (id(uimode).current_option() == "Dark");
                 then:
                   - lvgl.style.update:
                       id: header_footer
@@ -2036,18 +2032,9 @@ script:
                       items:
                         bg_color: 0x1a1a1a
                         bg_grad_color: 0x000000
-                  - lvgl.widget.show: listening_anim
-                  - lvgl.widget.show: thinking_anim
-                  - lvgl.widget.show: replying_anim
-                  - lvgl.widget.show: error_anim
-                else:
-                  - lvgl.widget.hide: listening_anim
-                  - lvgl.widget.hide: thinking_anim
-                  - lvgl.widget.hide: replying_anim
-                  - lvgl.widget.hide: error_anim
             - if:
                 condition: 
-                  lambda: return (id(uimode).current_option() == "Home");
+                  lambda: return (id(uimode).current_option() == "Grey");
                 then:
                   - lvgl.style.update:
                       id: header_footer
@@ -2074,6 +2061,45 @@ script:
                       items:
                         bg_color: 0x595959
                         bg_grad_color: 0x404040
+            - lambda: strncpy(id(current_uimode), id(uimode).current_option().c_str(), 50);
+            - lvgl.widget.redraw:
+
+  - id: set_vamode
+    then:
+      - if:
+          condition: 
+            - lambda: return (id(vamode).current_option() != id(current_vamode));
+          then:
+            - if:
+                condition: 
+                  lambda: return (id(vamode).current_option() == "Default" || id(vamode).current_option() == "" || id(vamode).current_option().empty());
+                then:
+                  - lvgl.widget.show: listening
+                  - lvgl.widget.show: thinking
+                  - lvgl.widget.show: replying
+                  - lvgl.widget.show: error
+                else:
+                  - lvgl.widget.hide: listening
+                  - lvgl.widget.hide: thinking
+                  - lvgl.widget.hide: replying
+                  - lvgl.widget.hide: error
+            - if:
+                condition: 
+                  lambda: return (id(vamode).current_option() == "HAL");
+                then:
+                  - lvgl.widget.show: listening_anim
+                  - lvgl.widget.show: thinking_anim
+                  - lvgl.widget.show: replying_anim
+                  - lvgl.widget.show: error_anim
+                else:
+                  - lvgl.widget.hide: listening_anim
+                  - lvgl.widget.hide: thinking_anim
+                  - lvgl.widget.hide: replying_anim
+                  - lvgl.widget.hide: error_anim
+            - if:
+                condition: 
+                  lambda: return (id(vamode).current_option() == "Home");
+                then:
                   - lvgl.widget.show: listening_anim2
                   - lvgl.widget.show: thinking_anim2
                   - lvgl.widget.show: replying_anim2
@@ -2083,13 +2109,13 @@ script:
                   - lvgl.widget.hide: thinking_anim2
                   - lvgl.widget.hide: replying_anim2
                   - lvgl.widget.hide: error_anim2
-            - lambda: strncpy(id(current_uimode), id(uimode).current_option().c_str(), 50);
+            - lambda: strncpy(id(current_vamode), id(vamode).current_option().c_str(), 50);
             - lvgl.widget.redraw:
           else:
             - if:
                 condition:
                   lambda: |-
-                        return (id(voice_assistant_phase) == ${voice_assist_listening_phase_id} && id(uimode).current_option() == "HAL");
+                        return (id(voice_assistant_phase) == ${voice_assist_listening_phase_id} && id(vamode).current_option() == "HAL");
                 then:
                   - lvgl.animimg.start:
                       id: listening_anim
@@ -2099,7 +2125,7 @@ script:
             - if:
                 condition:
                   lambda: |-
-                        return (id(voice_assistant_phase) == ${voice_assist_thinking_phase_id} && id(uimode).current_option() == "HAL");
+                        return (id(voice_assistant_phase) == ${voice_assist_thinking_phase_id} && id(vamode).current_option() == "HAL");
                 then:
                   - lvgl.animimg.start:
                       id: thinking_anim
@@ -2109,7 +2135,7 @@ script:
             - if:
                 condition:
                   lambda: |-
-                        return (id(voice_assistant_phase) == ${voice_assist_replying_phase_id} && id(uimode).current_option() == "HAL");
+                        return (id(voice_assistant_phase) == ${voice_assist_replying_phase_id} && id(vamode).current_option() == "HAL");
                 then:
                   - lvgl.animimg.start:
                       id: replying_anim
@@ -2119,7 +2145,7 @@ script:
             - if:
                 condition:
                   lambda: |-
-                        return (id(voice_assistant_phase) == ${voice_assist_replying_phase_id} && id(uimode).current_option() == "Home");
+                        return (id(voice_assistant_phase) == ${voice_assist_replying_phase_id} && id(vamode).current_option() == "Home");
                 then:
                   - lvgl.animimg.start:
                       id: replying_anim2
@@ -2629,6 +2655,13 @@ select:
     name: UI Mode
     widget: dropdown_uimode
 
+  - platform: lvgl
+    id: vamode
+    entity_category: config
+    restore_value: true
+    name: VA Mode
+    widget: dropdown_vamode
+
   - platform: template
     id: temp_unit
     name: "Temperature Unit"
@@ -2856,6 +2889,9 @@ globals:
     restore_value: false
     initial_value: '0.0'
   - id: current_uimode
+    type: char[50]
+    initial_value: ""
+  - id: current_vamode
     type: char[50]
     initial_value: ""
   - id: alarmclock_ringing
@@ -6888,22 +6924,37 @@ lvgl:
                                 - select.set_index:
                                     id: wake_word_engine_location
                                     index: 1
-                        
-                    - checkbox:
-                        id: chk_mute_reponse
-                        text: "Mute Responses"
-                        align: LEFT_MID
-                        text_align: LEFT
+                    - label:
+                        text: "VA Mode"
+                        align: CENTER
+                        text_align: CENTER
                         text_color: 0xFFFFFF
                         grid_cell_column_pos: 0
                         grid_cell_row_pos: 1
-                        grid_cell_x_align: CENTER
+                        grid_cell_x_align: END
                         grid_cell_y_align: CENTER
-                        on_change:
-                          switch.toggle: mute_response_switch
+                    - dropdown:
+                        id: dropdown_vamode
+                        styles: dropdown_style
+                        align: CENTER
+                        grid_cell_column_pos: 1
+                        grid_cell_row_pos: 1
+                        grid_cell_x_align: STRETCH
+                        grid_cell_y_align: STRETCH
+                        options:
+                          - Default
+                          - HAL
+                          - Home
+                        dropdown_list:
+                          selected:
+                            checked:
+                              text_color: 0xFF0000
+                        on_value:
+                          - delay: 1s
+                          - script.execute: set_vamode
                     - checkbox:
-                        id: chk_wake_sound
-                        text: "Wake Sound"
+                        id: chk_mute_reponse
+                        text: "Mute Responses"
                         align: LEFT_MID
                         text_align: LEFT
                         text_color: 0xFFFFFF
@@ -6912,10 +6963,22 @@ lvgl:
                         grid_cell_x_align: CENTER
                         grid_cell_y_align: CENTER
                         on_change:
-                          switch.toggle: wake_sound
+                          switch.toggle: mute_response_switch
                     - checkbox:
                         id: chk_display_conversation
                         text: "Show Responses"
+                        align: LEFT_MID
+                        text_align: LEFT
+                        text_color: 0xFFFFFF
+                        grid_cell_column_pos: 1
+                        grid_cell_row_pos: 2
+                        grid_cell_x_align: CENTER
+                        grid_cell_y_align: CENTER
+                        on_change:
+                          switch.toggle: display_conversation
+                    - checkbox:
+                        id: chk_wake_sound
+                        text: "Wake Sound"
                         align: LEFT_MID
                         text_align: LEFT
                         text_color: 0xFFFFFF
@@ -6924,7 +6987,7 @@ lvgl:
                         grid_cell_x_align: CENTER
                         grid_cell_y_align: CENTER
                         on_change:
-                          switch.toggle: display_conversation
+                          switch.toggle: wake_sound
                         
     - id: ss_set_page
       skip: true
@@ -7574,8 +7637,8 @@ lvgl:
                         grid_cell_y_align: STRETCH
                         options:
                           - Default
-                          - HAL
-                          - Home
+                          - Dark
+                          - Grey
                         dropdown_list:
                           selected:
                             checked:
