@@ -428,7 +428,7 @@ esphome:
 
   project:
     name: "Christian.p4-86-eth"
-    version: "2026.05.12"
+    version: "2026.05.15"
 
 api:
   encryption:
@@ -3952,6 +3952,9 @@ key_collector:
 #############################
 lvgl:
   id: lvgl_display
+  touchscreens:
+    - touchscreen_id: gt911_touchscreen
+      long_press_time: 60ms
   bottom_layer:
     bg_color: 0x000000
   buffer_size: 100%
@@ -4014,7 +4017,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: lightblue
                               text: "\U000F050F"
-                        on_release:
+                        on_long_press:
                           then:
                             lvgl.page.show: climate_page
                     - button:
@@ -4035,7 +4038,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: yellow
                               text: "\U000F06E8"
-                        on_release:
+                        on_long_press:
                           then:
                             lvgl.page.show: lights_page
                     - button:
@@ -4056,7 +4059,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: fuchsia
                               text: '${controls_page_icon}'
-                        on_release:
+                        on_long_press:
                           then:
                             lvgl.page.show: controls_page
                     - button:
@@ -4077,7 +4080,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: red
                               text: "\U000F075A"
-                        on_release:
+                        on_long_press:
                           then:
                             - lvgl.page.show: media_page
                     - button:
@@ -4098,7 +4101,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: aqua
                               text: '${scenes_page_icon}'
-                        on_release:
+                        on_long_press:
                           then:
                             lvgl.page.show: scenes_page
                     - button:
@@ -4119,7 +4122,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: lime
                               text: "\U000F033E"
-                        on_release:
+                        on_long_press:
                           then:
                             lvgl.page.show: security_page
     - id: climate_page
@@ -4198,7 +4201,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_30
                               text: "\U000F0210"
-                        on_release:
+                        on_long_press:
                           then:
                             - lvgl.page.show: climate_studio_page
                             - delay: 1s
@@ -4439,7 +4442,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0210"
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.service:
                                 service: climate.toggle
@@ -4574,7 +4577,7 @@ lvgl:
                         on_long_press_repeat:
                           - lvgl.spinbox.decrement: spinbox_studioac
                           - delay: 1s
-                        on_release:
+                        on_long_press:
                           then:
                             - delay: 250ms
                             - homeassistant.service:
@@ -4613,7 +4616,7 @@ lvgl:
                         on_long_press_repeat:
                           - lvgl.spinbox.increment: spinbox_studioac
                           - delay: 1s
-                        on_release:
+                        on_long_press:
                           then:
                             - delay: 250ms
                             - homeassistant.service:
@@ -4694,7 +4697,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0335"
-                        on_release:
+                        on_long_press:
                         - homeassistant.action:
                             action: homeassistant.toggle
                             data:
@@ -4729,7 +4732,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0335"
-                        on_release:
+                        on_long_press:
                         - homeassistant.action:
                             action: homeassistant.toggle
                             data:
@@ -4764,7 +4767,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0335"
-                        on_release:
+                        on_long_press:
                         - homeassistant.action:
                             action: homeassistant.toggle
                             data:
@@ -4799,7 +4802,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0335"
-                        on_release:
+                        on_long_press:
                         - homeassistant.action:
                             action: homeassistant.toggle
                             data:
@@ -4834,7 +4837,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0335"
-                        on_release:
+                        on_long_press:
                         - homeassistant.action:
                             action: homeassistant.toggle
                             data:
@@ -4869,7 +4872,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0335"
-                        on_release:
+                        on_long_press:
                         - homeassistant.action:
                             action: homeassistant.toggle
                             data:
@@ -4940,7 +4943,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${controls1_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: homeassistant.toggle
@@ -4976,7 +4979,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${controls2_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: homeassistant.toggle
@@ -5012,7 +5015,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${controls3_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: homeassistant.toggle
@@ -5048,7 +5051,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${controls4_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: homeassistant.toggle
@@ -5084,7 +5087,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${controls5_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: homeassistant.toggle
@@ -5120,7 +5123,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${controls6_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: homeassistant.toggle
@@ -5174,7 +5177,7 @@ lvgl:
                         grid_cell_row_pos: 2
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - lambda: |-
                                 if (id(speaker_volume) > 0) {
@@ -5192,7 +5195,7 @@ lvgl:
                         grid_cell_row_pos: 1
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5212,7 +5215,7 @@ lvgl:
                         grid_cell_row_pos: 2
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - lambda: |-
                                 if (id(speaker_volume) < 10) {
@@ -5230,7 +5233,7 @@ lvgl:
                         grid_cell_row_pos: 2
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - switch.toggle: media_mute
               - label:
@@ -5281,7 +5284,7 @@ lvgl:
                         grid_cell_row_pos: 1
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.service:
                                 service: media_player.media_previous_track
@@ -5298,7 +5301,7 @@ lvgl:
                         grid_cell_row_pos: 1
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.service:
                                 service: media_player.media_pause
@@ -5315,7 +5318,7 @@ lvgl:
                         grid_cell_row_pos: 1
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.service:
                                 service: media_player.media_next_track
@@ -5332,7 +5335,7 @@ lvgl:
                         grid_cell_row_pos: 2
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.service:
                                 service: media_player.volume_down
@@ -5349,7 +5352,7 @@ lvgl:
                         grid_cell_row_pos: 2
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - switch.toggle: ext_media_mute
                     - label:
@@ -5363,7 +5366,7 @@ lvgl:
                         grid_cell_row_pos: 2
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - homeassistant.service:
                                 service: media_player.volume_up
@@ -5444,7 +5447,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${scenes1_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5497,7 +5500,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${scenes2_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5550,7 +5553,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${scenes3_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5603,7 +5606,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${scenes4_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5656,7 +5659,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${scenes5_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5709,7 +5712,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: '${scenes6_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5799,7 +5802,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: red
                               text: '${security1_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5868,7 +5871,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: red
                               text: '${security2_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -5937,7 +5940,7 @@ lvgl:
                               text_font: icon_font_55
                               text_color: red
                               text: '${security3_icon_off}'
-                        on_release:
+                        on_long_press:
                           then:
                             - if:
                                 condition:
@@ -6005,7 +6008,7 @@ lvgl:
                         control:
                           checkable: true
                         text: "\U000F099E"
-                        on_release:
+                        on_long_press:
                           - if:
                               condition:
                                 lambda: return (id(alarm_status).state != "disarmed");
@@ -6018,7 +6021,7 @@ lvgl:
                         control:
                           checkable: true
                         text: "\U000F068A"
-                        on_release:
+                        on_long_press:
                           - if:
                               condition:
                                 lambda: return (id(alarm_status).state == "disarmed");
@@ -6037,7 +6040,7 @@ lvgl:
                         control:
                           checkable: true
                         text: "\U000F099D"
-                        on_release:
+                        on_long_press:
                           - if:
                               condition:
                                 lambda: return (id(alarm_status).state == "disarmed");
@@ -6056,7 +6059,7 @@ lvgl:
                         control:
                           checkable: true
                         text: "\U000F1828"
-                        on_release:
+                        on_long_press:
                           - if:
                               condition:
                                 lambda: return (id(alarm_status).state == "disarmed");
@@ -6576,7 +6579,7 @@ lvgl:
                         grid_cell_row_pos: 0
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - script.execute: stopalarmtimer
                     - label:
@@ -6589,7 +6592,7 @@ lvgl:
                         grid_cell_row_pos: 1
                         grid_cell_x_align: STRETCH
                         grid_cell_y_align: STRETCH
-                        on_release:
+                        on_long_press:
                           then:
                             - script.execute: stopalarmtimer
                     - button:
@@ -6611,7 +6614,7 @@ lvgl:
                               text_font: iconfont_small
                               align: CENTER
                               text: "\U000F068E"
-                        on_release:
+                        on_long_press:
                           - script.execute: snoozealarm
 
     - id: notification_page
@@ -6743,7 +6746,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F036F"
-                        on_release:
+                        on_long_press:
                           - lvgl.page.show: voice_set_page
                     - label:
                         text: "Screensaver"
@@ -6771,7 +6774,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0D90"
-                        on_release:
+                        on_long_press:
                           - lvgl.page.show: ss_set_page
                     - label:
                         text: "Info"
@@ -6799,7 +6802,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F1C6F"
-                        on_release:
+                        on_long_press:
                           - lvgl.page.show: info_page
                     - label:
                         text: "Device"
@@ -6827,7 +6830,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F08D6"
-                        on_release:
+                        on_long_press:
                           - lvgl.page.show: device_set_page
                     - label:
                         text: "UI"
@@ -6855,7 +6858,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0502"
-                        on_release:
+                        on_long_press:
                           - lvgl.page.show: ui_set_page
 
     - id: voice_set_page
@@ -7047,7 +7050,7 @@ lvgl:
                               id: ico_ss_set_1
                               align: CENTER
                               text: "Settings"
-                        on_release:
+                        on_long_press:
                           - lvgl.page.show: timeout_settings_page
                     - checkbox:
                         id: chk_timeout_blank
@@ -7942,7 +7945,7 @@ lvgl:
                       text_font: my_font
                       text_color: 0xFFFFFF
                       text: " "
-                      on_release:
+                      on_long_press:
                         then:
                           lvgl.page.show: alarmclock_page
                   - label:
@@ -7951,7 +7954,7 @@ lvgl:
                       text_font: iconfont_small
                       text_color: 0xFFFFFF
                       text: "\U000F0020"
-                      on_release:
+                      on_long_press:
                         then:
                           if:
                             condition:
@@ -7968,7 +7971,7 @@ lvgl:
                       text_font: iconfont_small
                       text_color: 0xFFFFFF
                       text: "\U000F051B"
-                      on_release:
+                      on_long_press:
                         then:
                           - lvgl.page.show: time_remaining_page
             - obj:
@@ -7995,7 +7998,7 @@ lvgl:
                       text_color: 0xFFFFFF
                       text_font: montserrat_30
                       text: "\uF1EB"
-                      on_release:
+                      on_long_press:
                         then:
                           lvgl.page.show: wifi_page
                   - label:
@@ -8011,7 +8014,7 @@ lvgl:
                       text_font: iconfont_small
                       text_color: 0xFFFFFF
                       text: "\U000F036C"
-                      on_release:
+                      on_long_press:
                         then:
                           - switch.toggle: mute_switch
                   - label:
@@ -8020,7 +8023,7 @@ lvgl:
                       text_font: iconfont_small
                       text_color: 0xFFFFFF
                       text: "\U000F099E"
-                      on_release:
+                      on_long_press:
                         then:
                           - lvgl.page.show: security_page
       - buttonmatrix:
@@ -8036,22 +8039,22 @@ lvgl:
             - buttons:
               - id: page_prev
                 text: "\uF053"
-                on_release:
+                on_long_press:
                   then:
                     lvgl.page.previous:
               - id: page_home
                 text: "\uF015"
-                on_release:
+                on_long_press:
                   then:
                     lvgl.page.show: idle_page
               - id: page_settings
                 text: "\uF013"
-                on_release:
+                on_long_press:
                   then:
                     lvgl.page.show: settings_page
               - id: page_next
                 text: "\uF054"
-                on_release:
+                on_long_press:
                   then:
                     lvgl.page.next:
       - bar:
@@ -8094,7 +8097,7 @@ lvgl:
                 indicator:
                   arc_color: 0x18bcf2
                   arc_width: 8
-          on_release:
+          on_long_press:
             - lvgl.widget.hide: boot_screen
 
   theme:
