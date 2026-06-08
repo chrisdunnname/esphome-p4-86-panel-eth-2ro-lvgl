@@ -44,7 +44,7 @@ Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/
  Wifi is recommended over Ethernet and both models of this device are supported. Ethernet version is required to mount in x86 box.
 
 The minimum supported ESPHome version is 2026.5.0.
-Last tested on Home Assistant 2026.5 and ESPHome Version 2026.5.
+Last tested on Home Assistant 2026.6 and ESPHome Version 2026.5.
 
 # Loading
 
