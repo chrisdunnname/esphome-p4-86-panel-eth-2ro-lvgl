@@ -261,7 +261,7 @@ substitutions:
 
 ################################### DO NOT CHANGE BELOW HERE UNLESS YOU ARE FAMILIAR WITH ESPHOME ###################################
 
-  project_version: "2026.06.18"
+  project_version: "2026.06.20"
 
 ###### Hardware Specific Configuration ######
 
@@ -291,15 +291,11 @@ esp32:
   engineering_sample: true
   framework:
     type: esp-idf
-    components:
-      - espressif/esp_hosted==2.12.1 #2026.5.0=>2026.7.0
     sdkconfig_options:
       CONFIG_ESP_HOSTED_MEMPOOL_PREFER_SPIRAM: y
       CONFIG_MBEDTLS_EXTERNAL_MEM_ALLOC: "y" 
       CONFIG_MBEDTLS_SSL_PROTO_TLS1_3: "y"
       CONFIG_SPIRAM_USE_MALLOC: "y"
-      CONFIG_SPIRAM_MALLOC_RESERVE_INTERNAL: "65536"
-      CONFIG_SPIRAM_MALLOC_ALWAYSINTERNAL: "4096"
     advanced:
       execute_from_psram: true
       enable_idf_experimental_features: true
