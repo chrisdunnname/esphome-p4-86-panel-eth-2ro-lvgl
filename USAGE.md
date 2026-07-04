@@ -71,7 +71,7 @@ This guide details the available Home Assistant entities implemented with this d
 | -------- | -------- |
 | BSSID | The current wifi base station ID | 
 | C6 Firmware | Indicates if the C6 firmware requires update | 
-} Config Version | Indicates the version of the yaml configuration currently deployed |
+| Config Version | Indicates the version of the yaml configuration currently deployed |
 | Device Uptime | The current device uptime. This updates every 5 minutes to minimize log data | 
 | IP Address | The current IP address of the device | 
 | Reboot | Reboots the device | 
