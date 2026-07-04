@@ -56,7 +56,7 @@ Last tested on Home Assistant 2026.6 and ESPHome Version 2026.6.
 
 **Home Page Functions**
 
-- The page title is configurable.
+- The page title, menu icons and page navigation are configurable.
 - Tapping on the time will show the alarm clock page.
 - An alarm clock indicator will appear when the alarm clock is enabled and will launch the alarm settings page. 
 - A timer status indicator will appear while a timer is running and will launch the time remaining page
@@ -89,6 +89,7 @@ Last tested on Home Assistant 2026.6 and ESPHome Version 2026.6.
 # Alarm Clock
 
 - Access this page by clicking on the toolbar clock. Allows enabling alarm and setting a time.
+- Up to 2 alarms can be set and a button will show which alarm is being viewed and allow switching between the two.
 - Alarm Clock can be turned off from same page or is available as a switch so it can be turned off from voice assistant.
 - Snooze duration can be set in Home Assistant (default 5 minutes).
 
@@ -117,11 +118,14 @@ Tap the change temperature buttons to move slightly or long press to change fast
 # Media
 **Internal Audio**
 
+- The page title is configurable.
+- This is the default media view if external output is disabled but an optional toggle can be displayed to allow accessing the external audio view.
 - The volume controls on the media page control the volume of the S3 box including the Voice Assistant.
 
 **External Audio**
 
 ![media](https://github.com/user-attachments/assets/693a625a-7cc2-4523-b6a3-f508334f3232)
+- This is the default media view if external output is enabled but an optional toggle can be displayed to allow accessing the internal audio view.
 
 # Screens
 
@@ -142,6 +146,7 @@ Tap the change temperature buttons to move slightly or long press to change fast
 
 ![p4_digital_screensaver](https://github.com/user-attachments/assets/c0119bf4-0970-47eb-8e49-f71bb348fb83)
 - The page title is configurable.
+- The top centre will show the upcoming alarm clock time if active but can be disabled.
 - The top left corner of the screen shows device Temperature and Humidity from sensors defined in substitutions. These additional substitutions will show temperature or temperature and humidity based on the available entities.
 - The top right side of the screen shows your specified weather entity temperature and condition and will not be shown if a valid entity is not specified.  Forecast outside temperature and condition can be provided by Open Weather Map or another weather forecast entity in HA.
 - The lower left and right corners include can be configured via substitutions to show any sensor value and any unit of measure. For example these could be air quality indicators. These only show if available. 
