@@ -97,6 +97,7 @@ Last tested on Home Assistant 2026.7 and ESPHome Version 2026.7.
 
 ![climate](https://github.com/user-attachments/assets/30a43196-fd34-4161-9c09-14a5f33dd7dc)
 - The page title is configurable.
+- The first item on this page can be configured to show either a temperature sensor or provide the temperature and a button to access the air conditioner.
 
 **Air Conditioner**
 
