@@ -6106,7 +6106,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0CE1"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.open
@@ -6131,7 +6131,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0CE1"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.open
@@ -6156,7 +6156,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0CE1"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.open
@@ -6177,7 +6177,7 @@ lvgl:
                               id: cover1_status
                               align: CENTER
                               text: "--%"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.stop
@@ -6198,7 +6198,7 @@ lvgl:
                               id: cover2_status
                               align: CENTER
                               text: "--%"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.stop
@@ -6219,7 +6219,7 @@ lvgl:
                               id: cover3_status
                               align: CENTER
                               text: "--%"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.stop
@@ -6244,7 +6244,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0047"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.close
@@ -6269,7 +6269,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0047"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.close
@@ -6294,7 +6294,7 @@ lvgl:
                               align: CENTER
                               text_font: icon_font_55
                               text: "\U000F0047"
-                        on_press:
+                        on_long_press:
                           then:
                             - homeassistant.action:
                                 action: cover.close
