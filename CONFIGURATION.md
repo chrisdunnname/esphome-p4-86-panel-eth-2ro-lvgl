@@ -456,7 +456,7 @@ These are the voice assistant phase IDs used by Home Assistant/ESPHome and shoul
 ### Fonts & Icons
 This configuration should not need to change although you can add missing characters to font_glyphs to have them render correctly if they do not display. Changing font or icon font usually requires further changes.
 
-### Hardware Specific configuration
+### Hardware Specific Configuration
 Most hardware specific configuration is best not changed but these options can be useful for different environments. 
 The wifi_fast_connect forces the device to immediately connect to the first available access point on boot. The wifi_power_save_mode controls how heavily the device manages power usage - this is important on battery powered devices. The wifi_native roaming determines whether ESPHome manages roaming (false) or your network uses 802.11v BSS Transition Management and 802.11k Radio Resource Management to determine the best access point (true).
 The voice_assistant_failed_reboot feature is a safety mechanism that reboots the device if the voice assistant hangs during responses. This is off by default but can be disabled if required.
@@ -469,5 +469,76 @@ The voice_assistant_failed_reboot feature is a safety mechanism that reboots the
   voice_assistant_failed_reboot: "false" #restarts device on voice assistant hangs
 ```
 
-### Other Configuration
-Other configuration is included in substitutions. You should not need to change these unless you are looking to experiment on different hardware.
+## Beyond Substitutions
+
+### Micro Wake Word Models
+Micro Wake Word models for on device wake words cannot be controlled by substitutions.
+6 models (and a stop model) are implemented out of the box and 2 more are available as optional in the configuration. 
+Each model can consume additional storage so you may want to turn off unrequired models if enabling or adding more. 
+
+To configure the models changes must be specified in 2 places.
+The models are defined in the micro_wake_word component - You can uncomment or comment these here.
+
+```
+  models:
+    - model: okay_nabu
+      id: okay_nabu
+    - model: hey_mycroft
+      id: hey_mycroft
+    - model: hey_jarvis
+      id: hey_jarvis
+    - model: alexa
+      id: alexa
+    # experimental models
+    #- model: https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/experiments/okay_computer.json
+    #  id: okay_computer
+    #- model: https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/experiments/hey_home_assistant.json
+    #  id: hey_home_assistant
+    - model: https://github.com/chrisdunnname/esphome-s3-box-3-lvgl/raw/main/microwakeword/okay_hal.json
+      id: okay_hal
+    - model: https://github.com/chrisdunnname/esphome-s3-box-3-lvgl/raw/main/microwakeword/hey_luna.json
+      id: hey_luna
+    - model: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
+      id: stop
+      internal: true
+      probability_cutoff: 0.40  # default 0.5; sliding avg ~0.58 fires reliably
+      sliding_window_size: 3    # default 5; faster trigger
+```
+
+To control the sensitivity settings a lambda is defined under the Wake Word Sensitivity Template Select. 
+If you add additional models you do not need to add them to this lambda unless you do want to control sensitivity on the device.
+If you activate the default disabled models then you may want to uncomment the lines in this lambda to enable the sensitivity options for them. 
+If you disable any of the currently active models you will need to comment out the relevant lines from this lambda.
+
+```
+    on_value:
+      lambda: |-
+        if (x == "Slightly sensitive") {
+          id(okay_nabu).set_probability_cutoff(${va_model_sensitivity_okay_nabu_low});
+          id(hey_jarvis).set_probability_cutoff(${va_model_sensitivity_hey_jarvis_low});
+          id(hey_mycroft).set_probability_cutoff(${va_model_sensitivity_hey_mycroft_low});
+          id(alexa).set_probability_cutoff(${va_model_sensitivity_alexa_low});
+          // id(okay_computer).set_probability_cutoff(${va_model_sensitivity_okay_computer_low});
+          // id(hey_home_assistant).set_probability_cutoff(${va_model_sensitivity_hey_home_assistant_low});
+          id(okay_hal).set_probability_cutoff(${va_model_sensitivity_okay_hal_low});
+          id(hey_luna).set_probability_cutoff(${va_model_sensitivity_hey_luna_low});
+        } else if (x == "Moderately sensitive") {
+          id(okay_nabu).set_probability_cutoff(${va_model_sensitivity_okay_nabu_medium});
+          id(hey_jarvis).set_probability_cutoff(${va_model_sensitivity_hey_jarvis_medium});
+          id(hey_mycroft).set_probability_cutoff(${va_model_sensitivity_hey_mycroft_medium});
+          id(alexa).set_probability_cutoff(${va_model_sensitivity_alexa_medium});
+          // id(okay_computer).set_probability_cutoff(${va_model_sensitivity_okay_computer_medium});
+          // id(hey_home_assistant).set_probability_cutoff(${va_model_sensitivity_hey_home_assistant_medium});
+          id(okay_hal).set_probability_cutoff(${va_model_sensitivity_okay_hal_medium});
+          id(hey_luna).set_probability_cutoff(${va_model_sensitivity_hey_luna_medium});
+        } else if (x == "Very sensitive") {
+          id(okay_nabu).set_probability_cutoff(${va_model_sensitivity_okay_nabu_high});
+          id(hey_jarvis).set_probability_cutoff(${va_model_sensitivity_hey_jarvis_high});
+          id(hey_mycroft).set_probability_cutoff(${va_model_sensitivity_hey_mycroft_high});
+          id(alexa).set_probability_cutoff(${va_model_sensitivity_alexa_high});
+          // id(okay_computer).set_probability_cutoff(${va_model_sensitivity_okay_computer_high});
+          // id(hey_home_assistant).set_probability_cutoff(${va_model_sensitivity_hey_home_assistant_high});
+          id(okay_hal).set_probability_cutoff(${va_model_sensitivity_okay_hal_high});
+          id(hey_luna).set_probability_cutoff(${va_model_sensitivity_hey_luna_high});
+        }
+```
