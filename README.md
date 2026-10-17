@@ -39,7 +39,7 @@ Requires variants of [ESP32-P4-86-Panel-ETH-2RO](https://www.waveshare.com/wiki/
  Wifi is recommended over Ethernet and both models of this device are supported. Ethernet version is required to mount in x86 box.
 
 The minimum supported ESPHome version is 2026.9.0.
-Last tested on Home Assistant 2026.9 and ESPHome Version 2026.9.
+Last tested on Home Assistant 2026.10 and ESPHome Version 2026.9.
 
 # Loading
 
@@ -167,7 +167,6 @@ Tap the change temperature buttons to move slightly or long press to change fast
 
 - Screensaver turns on screensaver after the specified delay
 - Settings opens next page to adjust timeouts
-- Wake on Presence wakes the device when the radar detects motion
 - Turn Screen Off turns off the screen after the specified delay
 
 **Screensaver Timeout Settings**

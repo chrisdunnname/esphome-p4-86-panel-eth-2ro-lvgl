@@ -313,7 +313,7 @@ substitutions:
 
 ################################### DO NOT CHANGE BELOW HERE UNLESS YOU ARE FAMILIAR WITH ESPHOME ###################################
 
-  project_version: "2026.09.17"
+  project_version: "2026.10.17"
 
 ###### Hardware Specific Configuration ######
 
