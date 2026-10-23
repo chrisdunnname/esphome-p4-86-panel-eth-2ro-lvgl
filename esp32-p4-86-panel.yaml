@@ -1,3 +1,4 @@
+###### Device Identity ######
 substitutions:
   name: "esp32-p4-86-panel"
   friendly_name: ESP32-P4-86-Panel
@@ -313,7 +314,7 @@ substitutions:
 
 ################################### DO NOT CHANGE BELOW HERE UNLESS YOU ARE FAMILIAR WITH ESPHOME ###################################
 
-  project_version: "2026.10.17"
+  project_version: "2026.10.22"
 
 ###### Hardware Specific Configuration ######
 
@@ -508,7 +509,7 @@ captive_portal:
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
-  min_version: 2026.9.0
+  min_version: 2026.10.0
   name_add_mac_suffix: false
   on_boot:
     - priority: -150
@@ -527,9 +528,8 @@ esphome:
             condition:
               switch.is_on: output_audio
             then:
-              media_player.volume_set:
+              media_player.mute:
                 id: speaker_media_player
-                volume: 0
         - delay: 30s
         - if:
             condition:
@@ -2870,9 +2870,8 @@ switch:
     restore_mode: RESTORE_DEFAULT_OFF
     entity_category: config
     on_turn_on:
-      - media_player.volume_set:
+      - media_player.mute:
           id: speaker_media_player
-          volume: 0
       - lvgl.widget.hide: obj_media
       - lvgl.widget.hide: lbl_media_playing
       - lvgl.widget.hide: bar_volume
@@ -2887,9 +2886,8 @@ switch:
           state:
             checked: true
     on_turn_off:
-      - media_player.volume_set:
+      - media_player.unmute:
           id: speaker_media_player
-          volume: 0.8
       - lvgl.widget.show: obj_media
       - lvgl.widget.show: lbl_media_playing
       - lvgl.widget.show: bar_volume
@@ -2941,9 +2939,8 @@ switch:
     id: media_mute
     optimistic: true
     on_turn_on:
-      - media_player.volume_set:
+      - media_player.mute:
           id: speaker_media_player
-          volume: 0
       - lvgl.label.update:
           id: lbl_media_mute
           text_color: red
@@ -2958,9 +2955,12 @@ switch:
           indicator:
             bg_color: red
     on_turn_off:
-      - media_player.volume_set:
-          id: speaker_media_player
-          volume: 0.8
+      - if:
+          condition:
+            switch.is_off: output_audio
+          then:
+            - media_player.unmute:
+                id: speaker_media_player
       - lvgl.label.update:
           id: lbl_media_mute
           text_color: lime
