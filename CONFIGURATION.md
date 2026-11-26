@@ -19,6 +19,25 @@ Binary Sensors or sensors with an on/off status will work as entities for the li
 
 For triggering more complex scenarios, helper Toggles (input_boolean) and automations can be really useful. You can set an input_boolean as the entity for any of the configurable buttons. You can create an automation using the input_boolean turning on as the trigger, have it perform some actions in Home Assistant and then set the input_boolean to off. On the device pushing the button will turn this on, triggering the automation and showing the on status and when the automation completes it will go back to off. 
 
+## Optional Packages
+
+This section specifies the configuration for features that can optionally be removed from the configuration.
+
+```
+packages:
+  <<: {} # Required if all optional components are commented out
+  remote_package_files:
+    url: https://github.com/chrisdunnname/esphome-p4-86-panel-eth-2ro-lvgl
+    refresh: always
+    files:
+	  - path: components/sendspin.yaml
+```
+### Sendspin
+
+Whole home audio using Sendspin. Seamlessly stream to devices or device groups using Music Assistant.
+
+https://www.sendspin-audio.com/
+
 ## Substitutions
 
 ### Core
@@ -104,7 +123,7 @@ Other pages that could be used out of the box on the home page are below:
 This is where you configure the name and the devices that will be displayed on the climate page. 
 The first item on this page can be a temperature entity or an air conditioner control. If climate1_entity returns a valid state the temperature will display like all other climate items on this page. If climate1_entity_ac returns a valid state then it will override this and show it's temperature instead and a button to access the air conditioner page.
 For the climate entity you can define 6 preset modes. Common options are provided in comments but can vary per device. You can find the preset modes for your device using Tools > States in Home Assistant. For each preset mode you can set a name and the state code. If these are not defined then the presets options will not be shown.
-All other climate sensor entities are expected to be temperature sensors.
+All other entities are expected to be temperature sensors.
 Hiding the page from navigation removes it from the navigation arrows and swiping.
 
 ```
