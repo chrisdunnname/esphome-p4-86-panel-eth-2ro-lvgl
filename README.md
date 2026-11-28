@@ -3,7 +3,7 @@ ESPHome Configuration for the ESP32-P4-86-Panel-ETH-2RO with an LVGL UI.
 
 This firmware provides the ESP32-P4-86-Panel-ETH-2RO (and non ethernet version) with a voice assistant, timers, screen saver with analog/digital clock and sleep, 12/24 hour time, media controls, alarm integration, alarm clock, internal and external audio, notifications with sound, and multiple pages for lights, thermostats, switches, media, scenes, locks other devices from your Home Assistant.
 A weather service from Home Assistant (e.g. open weather map) can provide temperature and condition for the screen saver.
-Sendspin audio supports synchronised group media streaming from Music Assistant.
+Sendspin audio supports synchronised group media streaming from Music Assistant, album art and metadata.
 
 A large number of entities are exposed to Home Assistant including a notification text entity that provides the ability to push notifications to the device which will display on screen for 10 seconds (with an optional notification sound) and an Image URL entity that provides the ability to push the URL for a PNG image to the device which will display on screen for 30 seconds (with no notification sound). This can be used with a [JPG to PNG Converter](https://github.com/youkorr/hacs-jpg-to-png-converter) in an automation to capture a snapshot from a camera and push it to the device.
 
@@ -122,6 +122,7 @@ Tap the change temperature buttons to move slightly or long press to change fast
 
 - The page title is configurable.
 - This is the default media view if external output is disabled but an optional toggle can be displayed to allow accessing the external audio view.
+- When SendSpin audio is streamed to this device the internal media page will display and alburm art and metadata will be shown.
 - The volume controls on the media page control the volume of the S3 box including the Voice Assistant.
 
 **External Audio**
