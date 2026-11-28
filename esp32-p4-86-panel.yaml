@@ -427,6 +427,10 @@ esp32:
       enable_idf_experimental_features: true
   flash_size: 32MB
 
+power_management:
+  - platform: esp32_power_management
+    enable_light_sleep: false
+
 psram:
   speed: 200MHz      
 
