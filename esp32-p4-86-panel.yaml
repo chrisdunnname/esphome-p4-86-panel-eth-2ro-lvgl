@@ -7315,7 +7315,7 @@ lvgl:
                   align: CENTER          
                   height: 4
                   width: 100%
-                  y: 85
+                  y: 295
                   styles: bg_color
                   bg_opa: TRANSP
                   indicator:
